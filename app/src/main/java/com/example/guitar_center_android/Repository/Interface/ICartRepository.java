@@ -9,8 +9,8 @@ import retrofit2.Response;
 
 public interface ICartRepository {
     boolean insertCart(Product product);
-    boolean deleteCart(Product product);
-    boolean editCart(Product product);
+    boolean deleteCart(String id_Product);
+    boolean updateCart(Product product);
     List<Product> getAllProduct();
 
 }

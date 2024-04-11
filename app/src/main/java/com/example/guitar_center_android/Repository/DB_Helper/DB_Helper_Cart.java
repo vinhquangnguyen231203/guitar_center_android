@@ -16,6 +16,7 @@ public class DB_Helper_Cart extends SQLiteOpenHelper {
             "unit INTEGER," +
             "price REAL," +
             "image TEXT," +
+            "categoryId TEXT," +
             "description TEXT)";
 
     //Constructor

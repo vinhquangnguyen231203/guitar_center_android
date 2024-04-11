@@ -13,9 +13,12 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface ProductAPIServices {
+
+    // người dùng xem danh sach sản phẩm
     @GET("products")
     Call<List<Product>> getAllProducts();
 
+    //Người dùng xem chi tiết sản phẩm
     @GET("products/{:id}")
     Call<Product>  getProductById(@Path("id") String id);
 

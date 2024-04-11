@@ -72,7 +72,7 @@ public class CartRepository implements ICartRepository {
         values.put("name_product", product.getProductName());
         values.put("unit", product.getUnit());
 
-        int rowsAffected = database.update("CART", values, "id_product = ?", new String[]{product.getId_product()});
+        int rowsAffected = database.update("CART", values, "id_product = ?", new String[]{product.getProductId()});
         if(rowsAffected > 0)
         {
             return  true;

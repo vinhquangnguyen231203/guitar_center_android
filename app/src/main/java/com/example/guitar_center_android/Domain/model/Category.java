@@ -1,4 +1,4 @@
-package com.example.guitar_center_android.Services.model;
+package com.example.guitar_center_android.Domain.model;
 
 public class Category {
     private int categoryId;

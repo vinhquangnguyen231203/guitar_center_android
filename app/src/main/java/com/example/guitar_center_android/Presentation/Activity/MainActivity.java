@@ -1,8 +1,10 @@
-package com.example.guitar_center_android;
+package com.example.guitar_center_android.Presentation.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.guitar_center_android.R;
 
 public class MainActivity extends AppCompatActivity {
 

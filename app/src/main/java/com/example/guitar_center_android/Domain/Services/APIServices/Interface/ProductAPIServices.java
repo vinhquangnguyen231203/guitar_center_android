@@ -1,4 +1,4 @@
-package com.example.guitar_center_android.Domain.Services.APIServices;
+package com.example.guitar_center_android.Domain.Services.APIServices.Interface;
 
 import com.example.guitar_center_android.Domain.model.Product;
 

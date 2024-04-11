@@ -1,7 +1,7 @@
 package com.example.guitar_center_android.Domain.model;
 
 public class Product {
-    private int productId;
+    private String productId;
     private String productName;
     private int unit;
     private Double price;
@@ -11,7 +11,7 @@ public class Product {
 
     //CONSTRUCTOR
 
-    public Product(int productId, String productName, int unit, Double price, String image, String categoryId, String description) {
+    public Product(String productId, String productName, int unit, Double price, String image, String categoryId, String description) {
         this.productId = productId;
         this.productName = productName;
         this.unit = unit;
@@ -24,11 +24,11 @@ public class Product {
     //METHODS
     //GETTER AND SETTER
 
-    public int getProductId() {
+    public String getProductId() {
         return productId;
     }
 
-    public void setProductId(int productId) {
+    public void setProductId(String productId) {
         this.productId = productId;
     }
 

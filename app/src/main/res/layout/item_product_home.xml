@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="175dp"
-    android:layout_height="300dp"
+    android:layout_height="270dp"
     android:layout_margin="8dp"
     android:background="@color/grey"
     android:elevation="3dp">
@@ -53,13 +53,5 @@
 
         tools:layout_editor_absoluteX="33dp"
         tools:layout_editor_absoluteY="214dp" />
-
-    <ImageView
-        android:id="@+id/btni_addToCart"
-        android:layout_width="190dp"
-        android:layout_height="60dp"
-        app:srcCompat="@drawable/add_to_cart"
-        tools:layout_editor_absoluteX="-31dp"
-        tools:layout_editor_absoluteY="240dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

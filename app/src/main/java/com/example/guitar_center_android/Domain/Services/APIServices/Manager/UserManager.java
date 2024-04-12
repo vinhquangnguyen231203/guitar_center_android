@@ -18,7 +18,7 @@ public class UserManager {
     public UserManager() {
         userAPIServices = RetrofitClient.getRetrofitInstance().create(UserAPIServices.class);
     }
-
+//
     //đăng ký
     public void createUser(User user, Callback<Boolean> callback) {
         Call<Boolean> call = userAPIServices.createUser(user);

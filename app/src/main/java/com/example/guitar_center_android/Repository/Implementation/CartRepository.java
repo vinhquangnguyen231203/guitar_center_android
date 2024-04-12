@@ -87,7 +87,7 @@ public class CartRepository implements ICartRepository {
     }
 
     @Override
-    public List<Product> getAllProduct() {
+    public List<Product> getAllCart() {
         //ResultSet
         // Tạo 1 list chứa các dữ liệu
         List<Product> productList = new ArrayList<>();

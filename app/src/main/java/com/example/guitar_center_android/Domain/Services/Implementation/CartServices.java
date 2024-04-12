@@ -45,7 +45,7 @@ public class CartServices implements ICartServices {
     }
 
     @Override
-    public List<Product> getAllProduct() {
-        return cartRepository.getAllProduct();
+    public List<Product> getAllCart() {
+        return cartRepository.getAllCart();
     }
 }

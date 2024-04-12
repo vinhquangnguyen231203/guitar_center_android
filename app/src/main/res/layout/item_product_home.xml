@@ -1,6 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="175dp"
+    android:layout_height="300dp"
+    android:layout_margin="8dp"
+    android:background="@color/grey"
+    android:elevation="3dp">
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="124dp"
+        android:layout_height="128dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        app:layout_constraintVertical_bias="0.188"
+        app:srcCompat="@drawable/piano_category" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/txt_productName"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_marginStart="24dp"
+        android:text="Piano dep"
+        android:textSize="19sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints"
+
+        tools:layout_editor_absoluteY="179dp" />
+
+    <TextView
+        android:id="@+id/txt_productPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1500$"
+        android:textSize="19sp"
+
+        android:textStyle="bold"
+
+        tools:layout_editor_absoluteX="33dp"
+        tools:layout_editor_absoluteY="214dp" />
+
+    <ImageView
+        android:id="@+id/btni_addToCart"
+        android:layout_width="190dp"
+        android:layout_height="60dp"
+        app:srcCompat="@drawable/add_to_cart"
+        tools:layout_editor_absoluteX="-31dp"
+        tools:layout_editor_absoluteY="240dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

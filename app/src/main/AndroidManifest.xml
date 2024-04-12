@@ -23,5 +23,5 @@
             </intent-filter>
         </activity>
     </application>
-
+<!--Fix Android Manifest-->
 </manifest>

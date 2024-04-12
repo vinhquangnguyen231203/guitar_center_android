@@ -19,21 +19,33 @@ public class CartServices implements ICartServices {
 
     @Override
     public boolean insertCart(Product product) {
+        if(product != null)
+        {
+            return cartRepository.insertCart(product);
+        }
         return false;
     }
 
     @Override
     public boolean deleteCart(String id_Product) {
+        if(! id_Product.isEmpty())
+        {
+            return cartRepository.deleteCart(id_Product);
+        }
         return false;
     }
 
     @Override
     public boolean updateCart(Product product) {
+        if(product != null)
+        {
+            return cartRepository.updateCart(product);
+        }
         return false;
     }
 
     @Override
     public List<Product> getAllProduct() {
-        return null;
+        return cartRepository.getAllProduct();
     }
 }

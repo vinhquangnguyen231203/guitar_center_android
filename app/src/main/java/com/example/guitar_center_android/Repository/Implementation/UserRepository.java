@@ -1,13 +1,17 @@
 package com.example.guitar_center_android.Repository.Implementation;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.guitar_center_android.Domain.model.Product;
 import com.example.guitar_center_android.Domain.model.UserSQL;
 import com.example.guitar_center_android.Repository.DB_Helper.DB_Helper_User;
 import com.example.guitar_center_android.Repository.Interface.IUserRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserRepository implements IUserRepository {
@@ -56,12 +60,37 @@ public class UserRepository implements IUserRepository {
 
     @Override
     public boolean updateUser(UserSQL user) {
+        ContentValues values = new ContentValues();
+        values.put("userName",user.getUserName());
+        values.put("fullName",user.getFullName());
 
+        int rowsAffeted = database.update("USER",values,"userName = ?",new String[]{user.getUserName()});
+        if(rowsAffeted > 0)
+        {
+            return true;
+        }
         return false;
     }
 
     @Override
     public List<UserSQL> getAllUser() {
-        return null;
+        String sql = "SELECT * FROM USER";
+
+        //Tạo 1 list để lấy dữ liệu
+        List<UserSQL> userList = new ArrayList<>();
+        Cursor cursor = database.rawQuery(sql, null);
+        if(((Cursor)cursor).moveToFirst())
+        {
+            do {
+                @SuppressLint("Range") UserSQL userSQL = new UserSQL(
+                        cursor.getString(cursor.getColumnIndex("userName")),
+                        cursor.getString(cursor.getColumnIndex("fullName"))
+                );
+                userList.add(userSQL);
+            }
+            while (cursor.moveToNext());
+        }
+        while (cursor.moveToNext());
+        return userList;
     }
 }

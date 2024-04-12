@@ -69,8 +69,14 @@ public class CartRepository implements ICartRepository {
     @Override
     public boolean updateCart(Product product) {
         ContentValues values = new ContentValues();
-        values.put("name_product", product.getProductName());
-        values.put("unit", product.getUnit());
+        values.put("id_product",product.getProductId());
+        values.put("name_product",product.getProductName());
+        values.put("unit",product.getUnit());
+        values.put("price",product.getPrice());
+        values.put("image",product.getImage());
+        values.put("categoryId",product.getCategoryId());
+        values.put("description",product.getDescription());
+
 
         int rowsAffected = database.update("CART", values, "id_product = ?", new String[]{product.getProductId()});
         if(rowsAffected > 0)

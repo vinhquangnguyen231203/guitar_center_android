@@ -21,6 +21,11 @@
             android:background="@color/white"
             android:orientation="vertical"
             android:padding="30dp">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_arrow_back_24"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -28,7 +33,9 @@
                 android:layout_gravity="center"
                 android:text="Đăng ký"
                 android:textSize="80px"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"/>
 
             <EditText
                 android:id="@+id/etUsername"

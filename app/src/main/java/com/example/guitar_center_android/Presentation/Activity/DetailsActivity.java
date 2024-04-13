@@ -17,7 +17,7 @@ import com.squareup.picasso.Picasso;
 public class DetailsActivity extends AppCompatActivity {
     //Instance Fields
     private Intent intent;
-    private TextView txtBack,txtProductName,txtProductPrice,txtProductDescription;
+    private TextView txtBack,txtProductName,txtProductPrice,txtProductDescription,txtProductUnit;
 
     private ImageView imgProduct;
 
@@ -25,8 +25,7 @@ public class DetailsActivity extends AppCompatActivity {
 
     private ImageButton btnSub, btnAdd;
 
-
-
+    private int count = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,12 +40,12 @@ public class DetailsActivity extends AppCompatActivity {
         Double productPrice = intent.getDoubleExtra("PRODUCT_PRICE",0);
         String productDescription = intent.getStringExtra("PRODUCT_DESCRIPTION");
 
-
         //Lấy các id
         txtBack = findViewById(R.id.returnHome_details);
         txtProductName = findViewById(R.id.txtProductName_details);
         txtProductPrice = findViewById(R.id.txtProductPrice_details);
         txtProductDescription = findViewById(R.id.txtDescription_details);
+        txtProductUnit = findViewById(R.id.txtProductUnit_details);
         imgProduct = findViewById(R.id.imgProduct_details);
         btnAdd = findViewById(R.id.btnAdd_details);
         btnSub = findViewById(R.id.btnSub_details);
@@ -74,7 +73,29 @@ public class DetailsActivity extends AppCompatActivity {
             }
         });
 
+        //Thực hiện tăng số lượng
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                count+=1;
+                txtProductUnit.setText(String.valueOf(count + 1));
+            }
+        });
+        btnSub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(count == 0)
+                {
+                    txtProductUnit.setText("0");
+                }
+                else
+                {
+                    count-=1;
+                    txtProductUnit.setText(String.valueOf(count));
+                }
 
-
+            }
+        });
     }
+
 }

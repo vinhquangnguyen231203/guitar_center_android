@@ -54,73 +54,87 @@
                     android:textStyle="italic"/>
 
             </RelativeLayout>
-
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
             <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="70dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
                     android:text="Tổng giá:"
-                    android:layout_marginTop="10dp"
-                    android:textStyle="bold"
-                    android:layout_marginLeft="20dp"/>
+                    android:textStyle="bold" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="80dp"
+                    android:layout_marginTop="10dp"
                     android:text="4.000.000,00"
-                    android:layout_marginTop="10dp"
-                    android:textStyle="italic"
-                    android:layout_marginLeft="80dp"/>
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginStart="180dp">
+                    android:textStyle="italic" />
 
-                <TextView
-                    android:id="@+id/textView28"
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:layout_marginEnd="8dp"
-                    android:gravity="center"
-                    android:text="+"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="180dp"
+                    android:layout_marginEnd="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.516" />
+                    app:layout_constraintEnd_toEndOf="parent">
 
+                    <TextView
+                        android:id="@+id/textView28"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_marginEnd="8dp"
+                        android:gravity="center"
+                        android:text="+"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.516" />
+
+                    <TextView
+                        android:id="@+id/textView29"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="0"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView28"
+                        app:layout_constraintEnd_toStartOf="@+id/textView28"
+                        app:layout_constraintStart_toEndOf="@+id/textView30"
+                        app:layout_constraintTop_toTopOf="@+id/textView28" />
+
+                    <TextView
+                        android:id="@+id/textView30"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_marginStart="8dp"
+                        android:gravity="center"
+                        android:text="-"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView28"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/textView28" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </RelativeLayout>
                 <TextView
-                    android:id="@+id/textView29"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:text="0"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView28"
-                    app:layout_constraintEnd_toStartOf="@+id/textView28"
-                    app:layout_constraintStart_toEndOf="@+id/textView30"
-                    app:layout_constraintTop_toTopOf="@+id/textView28" />
-
-                <TextView
-                    android:id="@+id/textView30"
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:layout_marginStart="8dp"
-                    android:gravity="center"
-                    android:text="-"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView28"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/textView28" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </RelativeLayout>
+                    android:text="Xoá sản phẩm"
+                    android:textColor="#DD5050"
+                    android:textStyle="bold|italic"
+                    android:layout_marginTop="-30dp"
+                    android:layout_marginLeft="20dp"/>
+        </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>

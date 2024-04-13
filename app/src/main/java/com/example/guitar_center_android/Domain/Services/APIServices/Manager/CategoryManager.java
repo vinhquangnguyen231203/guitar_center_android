@@ -2,12 +2,14 @@ package com.example.guitar_center_android.Domain.Services.APIServices.Manager;
 
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.guitar_center_android.Domain.Services.APIServices.Interface.CategoryAPIServices;
 import com.example.guitar_center_android.Domain.Services.APIServices.RetrofitClient;
 
 import com.example.guitar_center_android.Domain.model.Category;
+import com.google.gson.Gson;
 
 import java.util.List;
 

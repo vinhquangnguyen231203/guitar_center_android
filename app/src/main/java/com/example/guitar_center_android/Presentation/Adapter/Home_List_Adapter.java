@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.guitar_center_android.Domain.Services.APIServices.Manager.ProductManager;
+import com.example.guitar_center_android.Domain.model.Category;
 import com.example.guitar_center_android.Domain.model.Product;
 import com.example.guitar_center_android.Presentation.Activity.DetailsActivity;
 import com.example.guitar_center_android.R;
@@ -128,6 +129,21 @@ public class Home_List_Adapter extends RecyclerView.Adapter<Home_List_Adapter.Pr
         context.startActivity(intent);
     }
 
-    //
+    //Hiển thị product qua category
+    public void loadProductByCategory(String categoryID)
+    {
+        productManager.getProductInCategory(categoryID, new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                productList = response.body();
+                notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+                Toast.makeText(context, t.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }
 

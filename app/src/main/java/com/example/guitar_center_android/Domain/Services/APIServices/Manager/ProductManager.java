@@ -1,6 +1,7 @@
 package com.example.guitar_center_android.Domain.Services.APIServices.Manager;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -8,6 +9,7 @@ import androidx.annotation.NonNull;
 import com.example.guitar_center_android.Domain.Services.APIServices.Interface.ProductAPIServices;
 import com.example.guitar_center_android.Domain.Services.APIServices.RetrofitClient;
 import com.example.guitar_center_android.Domain.model.Product;
+import com.google.gson.Gson;
 
 import java.util.List;
 

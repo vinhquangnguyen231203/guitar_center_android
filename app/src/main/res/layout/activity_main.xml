@@ -84,7 +84,6 @@
                 android:textStyle="bold" />
 
             <LinearLayout
-                android:background="@color/cardview_shadow_start_color"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="25dp"
@@ -104,6 +103,7 @@
                         <ImageView
                             android:id="@+id/image_1"
                             android:layout_width="82dp"
+                            android:background="@color/Blu"
                             android:layout_height="wrap_content"
                             app:layout_constraintTop_toTopOf="parent"
                             app:srcCompat="@drawable/piano_category"
@@ -127,6 +127,8 @@
                             android:id="@+id/image_2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:background="#16FFFD"
+
                             app:srcCompat="@drawable/guitar_category"
                             tools:ignore="DuplicateIds,MissingConstraints"
                             tools:layout_editor_absoluteX="0dp"
@@ -151,6 +153,7 @@
                             android:id="@+id/image_3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:background="#FFD799"
                             app:srcCompat="@drawable/drum_category"
                             tools:ignore="MissingConstraints"
                             tools:layout_editor_absoluteX="0dp"
@@ -174,6 +177,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             app:srcCompat="@drawable/trumpet_category"
+                            android:background="#E16A8C"
                             tools:layout_editor_absoluteX="0dp"
                             tools:layout_editor_absoluteY="0dp"
                             tools:ignore="MissingConstraints" />
@@ -197,6 +201,8 @@
                             android:layout_height="wrap_content"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
+                            android:background="#AD84FBAD"
+
                             app:srcCompat="@drawable/violin_category"
                             tools:ignore="DuplicateIds,MissingConstraints" />
                     </androidx.constraintlayout.widget.ConstraintLayout>

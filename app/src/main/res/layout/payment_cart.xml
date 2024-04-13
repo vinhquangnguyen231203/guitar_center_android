@@ -81,7 +81,7 @@
                         android:text="Số điện thoại:"
                         android:textSize="16sp"/>
 
-                    <TextView
+                    <EditText
                         android:layout_width="304dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20sp"
@@ -103,10 +103,6 @@
                         android:layout_height="wrap_content"
                         android:text="COD" />
 
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Chuyển khoản" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -118,7 +114,7 @@
                         android:text="Địa chỉ:"
                         android:textSize="16sp" />
 
-                    <TextView
+                    <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="371 nguyễn kiệm"

@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Guitar_center_android"
         tools:targetApi="31">
+<!--        Main Activity-->
         <activity
             android:name=".Presentation.Activity.MainActivity"
             android:exported="true">
@@ -22,6 +23,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- DetailsActivity -->
+        <activity
+            android:name=".Presentation.Activity.DetailsActivity"
+            android:exported="true">
+            <!-- Intent-filter (nếu cần) -->
+        </activity>
+
+
     </application>
 <!--Fix Android Manifest-->
 </manifest>

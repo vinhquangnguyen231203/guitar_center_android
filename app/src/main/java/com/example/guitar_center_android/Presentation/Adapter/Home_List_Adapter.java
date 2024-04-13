@@ -67,9 +67,7 @@ public class Home_List_Adapter extends RecyclerView.Adapter<Home_List_Adapter.Pr
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context,DetailsActivity.class);
-                context.startActivity(intent);
-
+                dicrect_to_details(product);
             }
         });
     }
@@ -113,6 +111,21 @@ public class Home_List_Adapter extends RecyclerView.Adapter<Home_List_Adapter.Pr
                 Toast.makeText(context, t.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    //Chuyển hướng đến ProductDetails
+    public void  dicrect_to_details(Product product)
+    {
+        //Tạo intent
+        Intent intent = new Intent(context,DetailsActivity.class);
+
+        //Đính kèm dữ liệu cần gửi
+        intent.putExtra("PRODUCT_ID",product.getProductId());
+        intent.putExtra("PRODUCT_NAME",product.getProductName());
+        intent.putExtra("PRODUCT_PRICE",product.getPrice());
+        intent.putExtra("PRODUCT_DESCRIPTION",product.getDescription());
+
+        context.startActivity(intent);
     }
 }
 

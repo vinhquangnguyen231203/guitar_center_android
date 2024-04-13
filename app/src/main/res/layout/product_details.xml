@@ -3,7 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".Presentation.Activity.DetailsActivity"
+    >
+
 
 
     <ScrollView
@@ -17,6 +20,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/txtProductName_details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="70dp"
@@ -26,6 +30,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/txtProductPrice_details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Giá tiền"
@@ -33,7 +38,7 @@
                 android:textSize="20sp" />
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/imgProduct_details"
                 android:layout_width="match_parent"
                 android:layout_height="202dp"
                 app:srcCompat="@drawable/demo_guitar" />
@@ -43,15 +48,15 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/imageView6"
+                <ImageButton
+                    android:id="@+id/btnSub_details"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     app:srcCompat="@drawable/minus" />
 
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/txtProductUnit_details"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="16dp"
@@ -60,8 +65,8 @@
                     android:textAlignment="center"
                     android:textSize="18sp" />
 
-                <ImageView
-                    android:id="@+id/imageView4"
+                <ImageButton
+                    android:id="@+id/btnAdd_details"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -70,7 +75,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/txtDescription_details"
                 android:layout_width="match_parent"
                 android:layout_height="230dp"
                 android:layout_margin="16dp"
@@ -81,6 +86,7 @@
     </ScrollView>
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnAddCart_details"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginBottom="44dp"
@@ -89,7 +95,7 @@
         tools:layout_editor_absoluteX="0dp" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/returnHome_details"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"

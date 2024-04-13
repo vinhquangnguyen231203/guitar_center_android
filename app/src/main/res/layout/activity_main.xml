@@ -219,7 +219,7 @@
                 android:orientation="horizontal"/>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/view1"
+                android:id="@+id/productListView"
                 android:layout_width="match_parent"
                 android:layout_height="294dp"
                 android:paddingStart="16dp"

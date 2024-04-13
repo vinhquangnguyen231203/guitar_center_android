@@ -8,6 +8,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.guitar_center_android.Domain.Services.APIServices.Manager.UserManager;
+import com.example.guitar_center_android.Domain.model.User;
 import com.example.guitar_center_android.Presentation.Activity.LoginActivity;
 import com.example.guitar_center_android.Presentation.Activity.MainActivity;
 import com.example.guitar_center_android.R;
@@ -40,9 +41,9 @@ public class Login_Adapter {
         if(username.isEmpty() || password.isEmpty()){
             Toast.makeText(context, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
         }else {
-            userManager.login(username, password, new Callback<Response>() {
+            userManager.login(username, password, new Callback<User>() {
                 @Override
-                public void onResponse(Call<Response> call, Response<Response> response) {
+                public void onResponse(Call<User> call, Response<User> response) {
 
                     Log.d("login_Json",new Gson().toJson(response.body().toString()));
                     // Chuyển hướng đến trang home nếu đăng nhập thành công
@@ -53,7 +54,7 @@ public class Login_Adapter {
                 }
 
                 @Override
-                public void onFailure(Call<Response> call, Throwable t) {
+                public void onFailure(Call<User> call, Throwable t) {
                     Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });

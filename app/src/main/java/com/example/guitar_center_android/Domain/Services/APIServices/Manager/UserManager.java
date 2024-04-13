@@ -49,11 +49,11 @@ public class UserManager {
     }
 
     //đăng nhập
-    public void login(String username, String password, Callback<Response> callback) {
-        Call<Response> call = userAPIServices.loginUser(username,password);
-        call.enqueue(new Callback<Response>(){
+    public void login(String username, String password, Callback<User> callback) {
+        Call<User> call = userAPIServices.loginUser(username,password);
+        call.enqueue(new Callback<User>(){
             @Override
-            public void onResponse(Call<Response> call, Response<Response> response) {
+            public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     callback.onResponse(call, Response.success(response.body()));
                 } else {
@@ -62,7 +62,7 @@ public class UserManager {
             }
 
             @Override
-            public void onFailure(Call<Response> call, Throwable t) {
+            public void onFailure(Call<User> call, Throwable t) {
                 callback.onFailure(call,t);
             }
         });

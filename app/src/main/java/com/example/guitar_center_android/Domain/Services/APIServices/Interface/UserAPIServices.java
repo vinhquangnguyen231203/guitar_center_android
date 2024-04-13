@@ -22,7 +22,7 @@ public interface UserAPIServices {
 
     // người dùng đăng nhập
     @POST("users")
-    Call<Response>  loginUser(@Body String username, String password);
+    Call<User>  loginUser(@Body String username, String password);
 
     // sau khi đăng nhập sẽ hiện thông tin người dùng
     @GET("users/me")

@@ -45,11 +45,11 @@ public class MainActivity extends AppCompatActivity {
         // Tải danh sách sản phẩm từ API
         adapter.loadProduct();
 
-        ImageView bntSignUp = findViewById(R.id.iv_profile);
-        bntSignUp.setOnClickListener(new View.OnClickListener() {
+        ImageView bntLogin = findViewById(R.id.iv_profile);
+        bntLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SignupActivity.class);
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
         });

@@ -29,7 +29,12 @@
             android:exported="true">
             <!-- Intent-filter (nếu cần) -->
         </activity>
-
+        <!-- CartActivity -->
+        <activity
+            android:name=".Presentation.Activity.CartActivity"
+            android:exported="true">
+            <!-- Intent-filter (nếu cần) -->
+        </activity>
 
     </application>
 <!--Fix Android Manifest-->

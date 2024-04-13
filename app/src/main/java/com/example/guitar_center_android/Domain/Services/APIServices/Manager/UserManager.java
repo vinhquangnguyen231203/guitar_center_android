@@ -49,11 +49,11 @@ public class UserManager {
     }
 
     //đăng nhập
-    public void login(String username, String password, Callback<Boolean> callback) {
-        Call<Boolean> call = userAPIServices.loginUser(username,password);
-        call.enqueue(new Callback<Boolean>(){
+    public void login(String username, String password, Callback<Response> callback) {
+        Call<Response> call = userAPIServices.loginUser(username,password);
+        call.enqueue(new Callback<Response>(){
             @Override
-            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+            public void onResponse(Call<Response> call, Response<Response> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     callback.onResponse(call, Response.success(response.body()));
                 } else {
@@ -62,7 +62,7 @@ public class UserManager {
             }
 
             @Override
-            public void onFailure(Call<Boolean> call, Throwable t) {
+            public void onFailure(Call<Response> call, Throwable t) {
                 callback.onFailure(call,t);
             }
         });
@@ -89,11 +89,11 @@ public class UserManager {
     }
 
     //Sửa thông tin cá nhân
-    public  void updateUserInfor(User user ,Callback<Boolean> callback){
-        Call<Boolean> call = userAPIServices.updateUserInfor(user);
-        call.enqueue(new Callback<Boolean>() {
+    public  void updateUserInfor(User user ,Callback<Response> callback){
+        Call<Response> call = userAPIServices.updateUserInfor(user);
+        call.enqueue(new Callback<Response>() {
             @Override
-            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+            public void onResponse(Call<Response> call, Response<Response> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     callback.onResponse(call, Response.success(response.body()));
                 } else {
@@ -102,18 +102,18 @@ public class UserManager {
             }
 
             @Override
-            public void onFailure(Call<Boolean> call, Throwable t) {
+            public void onFailure(Call<Response> call, Throwable t) {
                 callback.onFailure(call,t);
             }
         });
     }
 
     //Đăng xuất
-    public void logouUser(Callback<Boolean> callback){
-        Call<Boolean> call = userAPIServices.logoutUser();
-        call.enqueue(new Callback<Boolean>() {
+    public void logouUser(Callback<Response> callback){
+        Call<Response> call = userAPIServices.logoutUser();
+        call.enqueue(new Callback<Response>() {
             @Override
-            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+            public void onResponse(Call<Response> call, Response<Response> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     callback.onResponse(call, Response.success(response.body()));
                 } else {
@@ -122,7 +122,7 @@ public class UserManager {
             }
 
             @Override
-            public void onFailure(Call<Boolean> call, Throwable t) {
+            public void onFailure(Call<Response> call, Throwable t) {
                 callback.onFailure(call,t);
             }
         });

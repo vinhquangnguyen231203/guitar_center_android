@@ -6,6 +6,7 @@ import com.example.guitar_center_android.Domain.model.User;
 
 
 import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.http.Body;
 
 import retrofit2.http.GET;
@@ -21,7 +22,7 @@ public interface UserAPIServices {
 
     // người dùng đăng nhập
     @POST("users")
-    Call<Boolean>  loginUser(@Body String username, String password);
+    Call<Response>  loginUser(@Body String username, String password);
 
     // sau khi đăng nhập sẽ hiện thông tin người dùng
     @GET("users/me")
@@ -29,9 +30,9 @@ public interface UserAPIServices {
 
     //người dùng chỉnh sửa thông tin hoặc thay đổi mật khẩu
     @PUT("users/update-infor")
-    Call<Boolean>  updateUserInfor(@Body User user);
+    Call<Response>  updateUserInfor(@Body User user);
 
     // người dùng đăng xuất
     @GET("users/logout")
-    Call<Boolean> logoutUser();
+    Call<Response> logoutUser();
 }

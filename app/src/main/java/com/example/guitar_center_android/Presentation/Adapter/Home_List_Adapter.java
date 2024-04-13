@@ -51,6 +51,7 @@ public class Home_List_Adapter extends RecyclerView.Adapter<Home_List_Adapter.Pr
         Product product = productList.get(position);
 
         //set data vào views
+        holder.textViewID.setText(product.getProductId());
         holder.textViewName.setText(product.getProductName());
         holder.textViewPrice.setText(String.valueOf(product.getPrice()));
 
@@ -83,13 +84,14 @@ public class Home_List_Adapter extends RecyclerView.Adapter<Home_List_Adapter.Pr
 
     public  static  class ProductViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
-        TextView textViewName, textViewPrice;
+        TextView textViewID, textViewName, textViewPrice;
 
         public ProductViewHolder(View itemView){
             super(itemView);
-            imageView = itemView.findViewById(R.id.img_product_home_list);
-            textViewName = itemView.findViewById(R.id.txt_productName_home_list);
-            textViewPrice = itemView.findViewById(R.id.txt_productPrice_home_list);
+            imageView = itemView.findViewById(R.id.imgProduct_home_list);
+            textViewID = itemView.findViewById(R.id.txtProductId_home_list);
+            textViewName = itemView.findViewById(R.id.txtProductName_home_list);
+            textViewPrice = itemView.findViewById(R.id.txtProductPrice_home_list);
 
         }
     }

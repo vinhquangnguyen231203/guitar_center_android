@@ -220,7 +220,6 @@
                 android:layout_height="294dp"
                 android:paddingStart="16dp"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:spanCount="2"
                 android:paddingEnd="16dp" />
 
         </LinearLayout>

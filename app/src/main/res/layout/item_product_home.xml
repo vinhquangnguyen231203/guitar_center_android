@@ -1,50 +1,100 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="150dp"
-    android:layout_height="230dp"
-    android:layout_margin="8dp"
-    android:elevation="3dp">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
 
-    <ImageView
-        android:layout_gravity="center"
-        android:id="@+id/img_product_home_list"
-        android:layout_width="124dp"
-        android:layout_height="128dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/txt_productName_home_list"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/piano_category" />
-
-    <TextView
-        android:id="@+id/txt_productName_home_list"
-        android:layout_width="wrap_content"
+    <GridLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:layout_gravity="center"
-        android:text="Piano dep"
-        android:textSize="19sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/img_product_home_list"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:columnCount="2"
+        android:rowCount="5"
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/txt_productPrice_home_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="1500$"
-        android:textSize="19sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/txt_productName_home_list"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        <!-- Hình ảnh sản phẩm -->
+        <ImageView
+            android:id="@+id/imgProduct_home_list"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/piano_category"
+            android:layout_column="0"
+            android:layout_row="0"
+            android:layout_columnSpan="1"
+            android:scaleType="centerCrop"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Cột chứa các tiêu đề và nội dung -->
+        <GridLayout
+            android:layout_width="295dp"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:columnCount="2"
+            android:paddingStart="16dp"
+            android:rowCount="5">
+
+            <!-- Tiêu đề và nội dung ID -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_row="0"
+                android:layout_column="0"
+                android:text="ID:"
+                android:textStyle="bold" />
+
+            <!-- Tiêu đề và nội dung Tên sản phẩm -->
+            <TextView
+                android:id="@+id/txtProductId_home_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_row="0"
+                android:layout_column="1"
+                android:layout_gravity=""
+                android:text="123456789" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_row="1"
+                android:layout_column="0"
+                android:text="Name:"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtProductName_home_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_row="1"
+                android:layout_column="1"
+                android:text="Nguyễn Vĩnh Quang" />
+
+
+            <!-- Tiêu đề và nội dung Price -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_row="3"
+                android:layout_column="0"
+                android:text="Price:"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtProductPrice_home_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_row="3"
+                android:layout_column="1"
+                android:text="$100" />
+
+
+            <!-- Nút Xem chi tiết sản phẩm -->
+            <Button
+                android:id="@+id/btnAddCart_home_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_row="4"
+                android:layout_column="1"
+                android:text="Add to Cart" />
+        </GridLayout>
+    </GridLayout>
+</LinearLayout>

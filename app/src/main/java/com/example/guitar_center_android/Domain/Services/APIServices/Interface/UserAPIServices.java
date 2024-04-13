@@ -17,7 +17,7 @@ public interface UserAPIServices {
 
     //người dùng đăng ký tài khoản
     @POST("users/register")
-    Call<Boolean> createUser(@Body User user);
+    Call<User> createUser(@Body User user);
 
     // người dùng đăng nhập
     @POST("users")

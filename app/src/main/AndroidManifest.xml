@@ -36,6 +36,20 @@
             <!-- Intent-filter (nếu cần) -->
         </activity>
 
+        <!-- LoginActivity -->
+        <activity
+            android:name=".Presentation.Activity.LoginActivity"
+            android:exported="true">
+            <!-- Intent-filter (nếu cần) -->
+        </activity>
+
+        <!-- RegisterActivity -->
+        <activity
+            android:name=".Presentation.Activity.SignupActivity"
+            android:exported="true">
+            <!-- Intent-filter (nếu cần) -->
+        </activity>
+
     </application>
 <!--Fix Android Manifest-->
 </manifest>

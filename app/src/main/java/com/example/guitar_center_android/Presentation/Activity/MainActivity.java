@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.example.guitar_center_android.Domain.Services.APIServices.Manager.ProductManager;
 import com.example.guitar_center_android.Domain.model.Product;
@@ -41,5 +44,14 @@ public class MainActivity extends AppCompatActivity {
 
         // Tải danh sách sản phẩm từ API
         adapter.loadProduct();
+
+        ImageView bntSignUp = findViewById(R.id.iv_profile);
+        bntSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SignupActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

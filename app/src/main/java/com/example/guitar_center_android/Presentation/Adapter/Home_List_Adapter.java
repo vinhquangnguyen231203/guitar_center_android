@@ -127,5 +127,6 @@ public class Home_List_Adapter extends RecyclerView.Adapter<Home_List_Adapter.Pr
 
         context.startActivity(intent);
     }
+    //
 }
 

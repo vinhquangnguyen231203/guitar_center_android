@@ -34,7 +34,6 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
-                android:background="@drawable/edittext_background"
                 android:drawableStart="@drawable/search_icon"
                 android:drawablePadding="8dp"
                 android:ems="10"
@@ -134,16 +133,7 @@
                             tools:layout_editor_absoluteY="0dp" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
-<!--                    <TextView-->
-<!--                        android:text="GUITAR"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:textStyle="bold"-->
-<!--                        android:layout_gravity="center"-->
-<!--                        >-->
 
-
-<!--                    </TextView>-->
                 </LinearLayout>
 
                 <LinearLayout

@@ -25,40 +25,19 @@
 
         <!-- Cột chứa các tiêu đề và nội dung -->
         <GridLayout
-            android:layout_width="295dp"
+            android:layout_width="215dp"
             android:layout_height="wrap_content"
             android:layout_row="0"
             android:layout_column="1"
             android:columnCount="2"
             android:paddingStart="16dp"
+
             android:rowCount="5">
 
             <!-- Tiêu đề và nội dung ID -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_row="0"
-                android:layout_column="0"
-                android:text="ID:"
-                android:textStyle="bold" />
 
             <!-- Tiêu đề và nội dung Tên sản phẩm -->
-            <TextView
-                android:id="@+id/txtProductId_home_list"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_row="0"
-                android:layout_column="1"
-                android:layout_gravity=""
-                android:text="123456789" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_row="1"
-                android:layout_column="0"
-                android:text="Name:"
-                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtProductName_home_list"
@@ -66,17 +45,13 @@
                 android:layout_height="wrap_content"
                 android:layout_row="1"
                 android:layout_column="1"
-                android:text="Nguyễn Vĩnh Quang" />
+                android:textSize="16sp"
+                android:text="Nguyễn Vĩnh Quang"
+                android:textStyle="bold" />
 
 
             <!-- Tiêu đề và nội dung Price -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_row="3"
-                android:layout_column="0"
-                android:text="Price:"
-                android:textStyle="bold" />
+
 
             <TextView
                 android:id="@+id/txtProductPrice_home_list"
@@ -84,7 +59,9 @@
                 android:layout_height="wrap_content"
                 android:layout_row="3"
                 android:layout_column="1"
-                android:text="$100" />
+                android:textSize="18sp"
+                android:text="$100"
+                android:textStyle="bold" />
 
 
             <!-- Nút Xem chi tiết sản phẩm -->
@@ -94,7 +71,9 @@
                 android:layout_height="wrap_content"
                 android:layout_row="4"
                 android:layout_column="1"
+                android:textSize="15sp"
                 android:text="Add to Cart" />
+
         </GridLayout>
     </GridLayout>
 </LinearLayout>

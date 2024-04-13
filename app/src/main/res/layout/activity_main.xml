@@ -269,7 +269,7 @@
                 android:layout_weight="1"
                 android:clickable="true"
                 android:onClick="goToProfile" />
-
+<!--...-->
         </LinearLayout>
     </RelativeLayout>
 

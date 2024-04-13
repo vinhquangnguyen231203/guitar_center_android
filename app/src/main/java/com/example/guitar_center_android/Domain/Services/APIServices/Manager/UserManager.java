@@ -1,6 +1,7 @@
 package com.example.guitar_center_android.Domain.Services.APIServices.Manager;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.guitar_center_android.Domain.Services.APIServices.Interface.UserAPIServices;
@@ -29,7 +30,11 @@ public class UserManager {
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     callback.onResponse(call, Response.success(response.body()));
+
+                    Toast.makeText(context, "Đăng ký thành công !",Toast.LENGTH_SHORT).show();
+
                 } else {
+
 
                     Toast.makeText(context, "Đăng ký thất bại !",Toast.LENGTH_SHORT).show();
 

@@ -87,7 +87,7 @@
                 android:id="@+id/txt_register_birth"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Ngày sinh" />
+                android:hint="Ngày sinh (dd-MM-yyyy)" />
 
             <EditText
                 android:id="@+id/txt_register_phone"

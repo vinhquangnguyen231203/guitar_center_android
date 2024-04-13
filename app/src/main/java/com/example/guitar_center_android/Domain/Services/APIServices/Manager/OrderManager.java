@@ -22,7 +22,8 @@ public class OrderManager {
 
     private final OrderAPIServices orderAPIServices;
     private Context context;
-    public OrderManager() {
+    public OrderManager(Context context) {
+        this.context = context;
         orderAPIServices = RetrofitClient.getRetrofitInstance().create(OrderAPIServices.class);
     }
 

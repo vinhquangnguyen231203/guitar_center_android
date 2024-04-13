@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,12 +30,10 @@ public class Home_List_Adapter extends RecyclerView.Adapter<Home_List_Adapter.Pr
     private List<Product> productList;
     private Context context;
     private ProductManager productManager;
-    private   RecyclerView recyclerView;
 
-    public  Home_List_Adapter(Context context){
+    public  Home_List_Adapter(Context context,ProductManager productManager){
         this.context = context;
-        productManager = new ProductManager();
-        loadProduct();
+        this.productManager = productManager;
     };
     @NonNull
     @Override
@@ -44,22 +43,7 @@ public class Home_List_Adapter extends RecyclerView.Adapter<Home_List_Adapter.Pr
     }
 
 
-    public void loadProduct(){
-        productManager.getAllProduct(new Callback<List<Product>>() {
-            @Override
-            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
-                productList = response.body();
-                recyclerView = recyclerView.findViewById(R.id.productListView);
-                recyclerView.setAdapter(Home_List_Adapter.this);
 
-            }
-
-            @Override
-            public void onFailure(Call<List<Product>> call, Throwable t) {
-
-            }
-        });
-    }
 
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
@@ -94,7 +78,7 @@ public class Home_List_Adapter extends RecyclerView.Adapter<Home_List_Adapter.Pr
     @Override
     public int getItemCount() {
         //trả về số lượng phần tử trong mảng
-        return productList.size();
+        return productList == null ? 0 : productList.size();
     }
 
     public  static  class ProductViewHolder extends RecyclerView.ViewHolder {
@@ -103,11 +87,30 @@ public class Home_List_Adapter extends RecyclerView.Adapter<Home_List_Adapter.Pr
 
         public ProductViewHolder(View itemView){
             super(itemView);
-            imageView = itemView.findViewById(R.id.img_product);
-            textViewName = itemView.findViewById(R.id.txt_productName);
-            textViewPrice = itemView.findViewById(R.id.txt_productPrice);
+            imageView = itemView.findViewById(R.id.img_product_home_list);
+            textViewName = itemView.findViewById(R.id.txt_productName_home_list);
+            textViewPrice = itemView.findViewById(R.id.txt_productPrice_home_list);
 
         }
+    }
+
+    // --------- XỬ LÝ Ở ĐÂY -------
+
+    //Load sản pham len trang home
+    public void loadProduct()
+    {
+        productManager.getAllProduct(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                productList = response.body();
+                notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+                Toast.makeText(context, t.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
 

@@ -8,7 +8,7 @@
     android:elevation="3dp">
 
     <ImageView
-        android:id="@+id/img_product"
+        android:id="@+id/img_product_home_list"
         android:layout_width="124dp"
         android:layout_height="128dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -23,7 +23,7 @@
 
 
     <TextView
-        android:id="@+id/txt_productName"
+        android:id="@+id/txt_productName_home_list"
         android:layout_width="wrap_content"
         android:layout_height="22dp"
         android:layout_marginStart="24dp"
@@ -36,7 +36,7 @@
         tools:layout_editor_absoluteY="179dp" />
 
     <TextView
-        android:id="@+id/txt_productPrice"
+        android:id="@+id/txt_productPrice_home_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="1500$"

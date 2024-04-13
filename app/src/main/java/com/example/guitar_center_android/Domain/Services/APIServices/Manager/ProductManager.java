@@ -19,7 +19,8 @@ public class ProductManager {
 
     private final ProductAPIServices productAPIServices;
     private Context context;
-    public ProductManager() {
+    public ProductManager(Context context) {
+        this.context = context;
         productAPIServices = RetrofitClient.getRetrofitInstance().create(ProductAPIServices.class);
     }
 

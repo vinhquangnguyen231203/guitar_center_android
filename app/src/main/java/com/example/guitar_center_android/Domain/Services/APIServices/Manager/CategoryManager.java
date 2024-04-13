@@ -21,7 +21,8 @@ public class CategoryManager {
 
     private final CategoryAPIServices categoryAPIServices;
     private Context context;
-    public CategoryManager() {
+    public CategoryManager(Context context) {
+        this.context = context;
         categoryAPIServices = RetrofitClient.getRetrofitInstance().create(CategoryAPIServices.class);
     }
 

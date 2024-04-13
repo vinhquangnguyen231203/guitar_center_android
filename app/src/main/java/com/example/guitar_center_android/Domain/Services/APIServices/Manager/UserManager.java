@@ -15,7 +15,8 @@ import retrofit2.Response;
 public class UserManager {
     private final UserAPIServices userAPIServices;
     private Context context;
-    public UserManager() {
+    public UserManager(Context context) {
+        this.context = context;
         userAPIServices = RetrofitClient.getRetrofitInstance().create(UserAPIServices.class);
     }
 //

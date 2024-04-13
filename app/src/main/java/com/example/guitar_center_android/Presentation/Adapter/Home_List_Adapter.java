@@ -1,4 +1,113 @@
 package com.example.guitar_center_android.Presentation.Adapter;
 
-public class Home_List_Adapter {
+
+import android.content.Context;
+import android.content.Intent;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.guitar_center_android.Domain.Services.APIServices.Manager.ProductManager;
+import com.example.guitar_center_android.Domain.model.Product;
+import com.example.guitar_center_android.Presentation.Activity.DetailsActivity;
+import com.example.guitar_center_android.R;
+import com.squareup.picasso.Picasso;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class Home_List_Adapter extends RecyclerView.Adapter<Home_List_Adapter.ProductViewHolder> {
+
+    private List<Product> productList;
+    private Context context;
+    private ProductManager productManager;
+    private   RecyclerView recyclerView;
+
+    public  Home_List_Adapter(Context context){
+        this.context = context;
+        productManager = new ProductManager();
+        loadProduct();
+    };
+    @NonNull
+    @Override
+    public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product_home, parent, false);
+        return new ProductViewHolder(view);
+    }
+
+
+    public void loadProduct(){
+        productManager.getAllProduct(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                productList = response.body();
+                recyclerView = recyclerView.findViewById(R.id.productListView);
+                recyclerView.setAdapter(Home_List_Adapter.this);
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
+
+        Product product = productList.get(position);
+
+        //set data vào views
+        holder.textViewName.setText(product.getProductName());
+        holder.textViewPrice.setText(String.valueOf(product.getPrice()));
+
+        //xử lý picasso
+        String imagePath = "http://10.0.2.2:3333/api/products/"+product.getProductId()+"/image";
+        Picasso.get()
+                .load(imagePath)
+//                .placeholder(R.drawable.placeholder_image) // Placeholder image khi đang tải
+//                .error(R.drawable.error_image) // Ảnh lỗi nếu không tải được
+                .into(holder.imageView);
+
+        //set click listenerts for image
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,DetailsActivity.class);
+                context.startActivity(intent);
+
+            }
+        });
+    }
+
+
+
+    @Override
+    public int getItemCount() {
+        //trả về số lượng phần tử trong mảng
+        return productList.size();
+    }
+
+    public  static  class ProductViewHolder extends RecyclerView.ViewHolder {
+        ImageView imageView;
+        TextView textViewName, textViewPrice;
+
+        public ProductViewHolder(View itemView){
+            super(itemView);
+            imageView = itemView.findViewById(R.id.img_product);
+            textViewName = itemView.findViewById(R.id.txt_productName);
+            textViewPrice = itemView.findViewById(R.id.txt_productPrice);
+
+        }
+    }
 }
+

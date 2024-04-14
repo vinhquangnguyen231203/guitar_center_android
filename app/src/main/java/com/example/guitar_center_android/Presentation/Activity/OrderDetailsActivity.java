@@ -1,4 +1,4 @@
 package com.example.guitar_center_android.Presentation.Activity;
 
-public class PaymentCartActivity {
+public class OrderDetailsActivity {
 }

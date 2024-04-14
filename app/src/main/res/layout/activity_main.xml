@@ -96,7 +96,7 @@
                         android:layout_gravity="center">
 
                         <ImageView
-                            android:id="@+id/image_1"
+                            android:id="@+id/category_p"
                             android:layout_width="82dp"
                             android:background="@color/Blu"
                             android:layout_height="wrap_content"
@@ -119,13 +119,12 @@
                         android:layout_gravity="center">
 
                         <ImageView
-                            android:id="@+id/image_2"
+                            android:id="@+id/category_g"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="#16FFFD"
-
+                            android:background="#9C27B0"
                             app:srcCompat="@drawable/guitar_category"
-                            tools:ignore="DuplicateIds,MissingConstraints"
+                            tools:ignore="MissingConstraints"
                             tools:layout_editor_absoluteX="0dp"
                             tools:layout_editor_absoluteY="0dp" />
 
@@ -145,7 +144,7 @@
                         android:layout_gravity="center">
 
                         <ImageView
-                            android:id="@+id/image_3"
+                            android:id="@+id/category_r"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="#FFD799"
@@ -168,7 +167,7 @@
                         android:layout_gravity="center">
 
                         <ImageView
-                            android:id="@+id/image_4"
+                            android:id="@+id/category_t"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             app:srcCompat="@drawable/trumpet_category"
@@ -191,7 +190,7 @@
                         android:layout_gravity="center">
 
                         <ImageView
-                            android:id="@+id/image_4"
+                            android:id="@+id/category_v"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -235,40 +234,36 @@
             android:layout_alignParentBottom="true" >
 
             <ImageView
-                android:id="@+id/iv_home"
+                android:id="@+id/img_home"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_home"
                 android:layout_weight="1"
-                android:clickable="true"
-                android:onClick="goToHome" />
+                android:clickable="true" />
 
             <ImageView
-                android:id="@+id/iv_cart"
+                android:id="@+id/img_cart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_cart"
                 android:layout_weight="1"
-                android:clickable="true"
-                android:onClick="goToCart" />
+                android:clickable="true" />
 
             <ImageView
-                android:id="@+id/iv_orders"
+                android:id="@+id/img_order"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_history_orders"
                 android:layout_weight="1"
-                android:clickable="true"
-                android:onClick="goToOrders" />
+                android:clickable="true" />
 
             <ImageView
-                android:id="@+id/iv_profile"
+                android:id="@+id/img_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_user"
                 android:layout_weight="1"
-                android:clickable="true"
-                android:onClick="goToProfile" />
+                android:clickable="true" />
 <!--...-->
         </LinearLayout>
     </RelativeLayout>

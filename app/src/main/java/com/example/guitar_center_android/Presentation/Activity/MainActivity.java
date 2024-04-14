@@ -79,14 +79,13 @@ public class MainActivity extends AppCompatActivity {
         btnCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,CartActivity.class);
-                startActivity(intent);
+                direct(CartActivity.class);
             }
         });
         btnOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                direct(OrderStatusActivity.class);
             }
         });
 

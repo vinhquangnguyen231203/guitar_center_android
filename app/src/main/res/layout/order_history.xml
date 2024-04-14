@@ -24,12 +24,15 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/order_list_view"
+
                 android:layout_width="match_parent"
                 android:layout_height="294dp"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp" />
         </ScrollView>
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_orderHistory_home"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:text="Quay về trang chủ" />

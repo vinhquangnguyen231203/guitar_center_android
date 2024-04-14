@@ -5,14 +5,14 @@ import java.util.Date;
 public class Order {
     private String orderId;
     private String address;
-    private Date orderDate;
+    private String orderDate;
     private String phone;
     private String status;
     private double totalPrice;
     private String username;
 
     // Constructor
-    public Order(String orderId, String address, Date orderDate, String phone, String status, double totalPrice, String username) {
+    public Order(String orderId, String address, String orderDate, String phone, String status, double totalPrice, String username) {
         this.orderId = orderId;
         this.address = address;
         this.orderDate = orderDate;
@@ -39,11 +39,11 @@ public class Order {
         this.address = address;
     }
 
-    public Date getOrderDate() {
+    public String getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(Date orderDate) {
+    public void setOrderDate(String orderDate) {
         this.orderDate = orderDate;
     }
 

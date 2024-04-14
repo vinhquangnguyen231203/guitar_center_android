@@ -107,7 +107,7 @@
         android:background="#BAB2CA"
         android:orientation="horizontal"
         android:gravity="center"
-        app:layout_constraintTop_toBottomOf=""> <!-- Thay thế linear_layout_status bằng id của LinearLayout chứa các TextView trạng thái -->
+        app:layout_constraintTop_toBottomOf="@id/btn_viewOrderDetail"> <!-- Thay thế linear_layout_status bằng id của LinearLayout chứa các TextView trạng thái -->
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_viewOrderDetail"

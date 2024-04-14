@@ -7,8 +7,10 @@ import android.widget.Toast;
 import com.example.guitar_center_android.Domain.Services.APIServices.Interface.UserAPIServices;
 
 import com.example.guitar_center_android.Domain.Services.APIServices.RetrofitClient;
+import com.example.guitar_center_android.Domain.model.LoginRequest;
 import com.example.guitar_center_android.Domain.model.User;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.Gson;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,9 +31,9 @@ public class UserManager {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    callback.onResponse(call, Response.success(response.body()));
-
+                    Log.d("createUser_Json", new Gson().toJson(response.body()));
                     Toast.makeText(context, "Đăng ký thành công !",Toast.LENGTH_SHORT).show();
+                    callback.onResponse(call, Response.success(response.body()));
 
                 } else {
 
@@ -49,12 +51,13 @@ public class UserManager {
     }
 
     //đăng nhập
-    public void login(String username, String password, Callback<User> callback) {
-        Call<User> call = userAPIServices.loginUser(username,password);
-        call.enqueue(new Callback<User>(){
+    public void login(String username, String password, Callback<Response<String>> callback) {
+        Call<Response<String>> call = userAPIServices.loginUser(new LoginRequest(username,password));
+        call.enqueue(new Callback<Response<String>>(){
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(Call<Response<String>> call, Response<Response<String>> response) {
                 if (response.isSuccessful() && response.body() != null) {
+                    Log.d("login_Json",new Gson().toJson(response.body()));
                     callback.onResponse(call, Response.success(response.body()));
                 } else {
                     Toast.makeText(context, "Đăng nhập thất bại !",Toast.LENGTH_SHORT).show();
@@ -62,28 +65,57 @@ public class UserManager {
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(Call<Response<String>> call, Throwable t) {
                 callback.onFailure(call,t);
             }
         });
     }
 
+
     //Xem thông tin cá nhân
-    public  void getUserInfor(Callback<User> callback){
+//    public  void getUserInfor(Callback<User> callback){
+//        Call<User> call = userAPIServices.getUserInfor();
+//
+//        call.enqueue(new Callback<User>() {
+//            @Override
+//            public void onResponse(Call<User> call, Response<User> response) {
+//                if (response.isSuccessful() && response.body() != null) {
+//
+//                    callback.onResponse(call, Response.success(response.body()));
+//                } else {
+//                    Log.d("getUser_Json",new Gson().toJson(response.body()));
+//
+//                    Toast.makeText(context, "Lấy thông tin cá nhân thất bại in Manager !",Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<User> call, Throwable t) {
+//                callback.onFailure(call,t);
+//            }
+//        });
+//    }
+
+    public void getUserInfor(Callback<User> callback){
+        // Gọi API để lấy thông tin người dùng
         Call<User> call = userAPIServices.getUserInfor();
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    callback.onResponse(call, Response.success(response.body()));
+                    // Gọi callback onResponse() với thông tin người dùng
+                    Log.d("getUserInfor_Json", new Gson().toJson(response.body()));
+                    callback.onResponse(call, response);
                 } else {
-                    Toast.makeText(context, "Lấy thông tin cá nhân thất bại !",Toast.LENGTH_SHORT).show();
+                    // Gọi callback onFailure() nếu không có dữ liệu hoặc lỗi
+                    callback.onFailure(call, new Throwable("Lấy thông tin cá nhân thất bại!"));
                 }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                callback.onFailure(call,t);
+                // Gọi callback onFailure() nếu xảy ra lỗi trong quá trình gọi API
+                callback.onFailure(call, t);
             }
         });
     }
@@ -95,6 +127,7 @@ public class UserManager {
             @Override
             public void onResponse(Call<Response> call, Response<Response> response) {
                 if (response.isSuccessful() && response.body() != null) {
+                    Log.d("updateInfor_Json", new Gson().toJson(response.body()));
                     callback.onResponse(call, Response.success(response.body()));
                 } else {
                     Toast.makeText(context, "Cập nhật thất bại !",Toast.LENGTH_SHORT).show();
@@ -115,6 +148,8 @@ public class UserManager {
             @Override
             public void onResponse(Call<Response> call, Response<Response> response) {
                 if (response.isSuccessful() && response.body() != null) {
+                    Log.d("logout_Json", new Gson().toJson(response.body()));
+
                     callback.onResponse(call, Response.success(response.body()));
                 } else {
                     Toast.makeText(context, "Đăng xuất thất bại !",Toast.LENGTH_SHORT).show();

@@ -106,7 +106,7 @@
                             android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/txt_fullname"
+                            android:id="@+id/txt_profile_fullname"
                             android:layout_width="0dp"
                             android:layout_height="40dp"
                             android:layout_marginStart="5dp"
@@ -131,7 +131,7 @@
                             android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/txt_password"
+                            android:id="@+id/txt_profile_password"
                             android:layout_width="0dp"
                             android:layout_height="40dp"
                             android:layout_marginStart="5dp"
@@ -157,7 +157,7 @@
                             android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/txt_phone"
+                            android:id="@+id/txt_profile_phone"
                             android:layout_width="0dp"
                             android:layout_height="40dp"
                             android:layout_marginStart="5dp"
@@ -183,7 +183,7 @@
                             android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/txt_birth"
+                            android:id="@+id/txt_profile_birth"
                             android:layout_width="0dp"
                             android:layout_height="40dp"
                             android:layout_marginStart="5dp"
@@ -208,7 +208,7 @@
                             android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/txt_address"
+                            android:id="@+id/txt_profile_address"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
@@ -235,6 +235,7 @@
                 >
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_updateProfile"
                     android:layout_width="300dp"
                     android:layout_height="60dp"
                     android:textSize="20dp"

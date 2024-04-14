@@ -2,6 +2,7 @@ package com.example.guitar_center_android.Presentation.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
@@ -40,22 +41,38 @@ public class Login_Adapter {
 
         if(username.isEmpty() || password.isEmpty()){
             Toast.makeText(context, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
-            return;
         }else {
-            userManager.login(username, password, new Callback<User>() {
+            userManager.login(username, password, new Callback<Response<String>>() {
                 @Override
-                public void onResponse(Call<User> call, Response<User> response) {
+                public void onResponse(Call<Response<String>> call, Response<Response<String>> response) {
+//                    // Lưu session vào SharedPreferences sau khi đăng nhập thành công
+//                    SharedPreferences sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+//                    SharedPreferences.Editor editor = sharedPreferences.edit();
+//                    editor.putString("username", username);
+//                    // Lưu các thông tin khác nếu cần
+//                    editor.apply();
+//                    Toast.makeText(context, "Đăng nhập thành công ", Toast.LENGTH_SHORT).show();
+//                    Log.d("login_Json",new Gson().toJson(response.body()));
+//                    // Chuyển hướng đến trang home nếu đăng nhập thành công
+//                    Intent intent = new Intent(context, MainActivity.class);
+//                    context.startActivity(intent);
 
+                    // Lưu session vào SharedPreferences sau khi đăng nhập thành công
+                    SharedPreferences sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("username", username); // Lưu tên người dùng
+                    // Lưu các thông tin khác nếu cần
+                    editor.apply();
 
+                    Toast.makeText(context, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                     // Chuyển hướng đến trang home nếu đăng nhập thành công
                     Intent intent = new Intent(context, MainActivity.class);
                     context.startActivity(intent);
-                    Toast.makeText(context, "Đăng nhập thành công ", Toast.LENGTH_SHORT).show();
 
                 }
 
                 @Override
-                public void onFailure(Call<User> call, Throwable t) {
+                public void onFailure(Call<Response<String>> call, Throwable t) {
                     Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });

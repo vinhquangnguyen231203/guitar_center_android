@@ -1,6 +1,7 @@
 package com.example.guitar_center_android.Domain.Services.APIServices.Interface;
 
 
+import com.example.guitar_center_android.Domain.model.LoginRequest;
 import com.example.guitar_center_android.Domain.model.User;
 
 
@@ -22,7 +23,7 @@ public interface UserAPIServices {
 
     // người dùng đăng nhập
     @POST("users")
-    Call<User>  loginUser(@Body String username, String password);
+    Call<Response<String>> loginUser(@Body LoginRequest loginRequest);
 
     // sau khi đăng nhập sẽ hiện thông tin người dùng
     @GET("users/me")

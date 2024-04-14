@@ -11,8 +11,11 @@ import android.widget.ImageView;
 import android.widget.SearchView;
 
 import com.example.guitar_center_android.Domain.Services.APIServices.Manager.ProductManager;
+import com.example.guitar_center_android.Domain.Services.Implementation.UserServices;
+import com.example.guitar_center_android.Domain.Services.Interface.IUserServices;
 import com.example.guitar_center_android.Domain.model.Product;
 import com.example.guitar_center_android.Presentation.Adapter.Home_List_Adapter;
+import com.example.guitar_center_android.Presentation.Controller.Command.CommandProcessor;
 import com.example.guitar_center_android.R;
 
 import java.util.List;
@@ -32,6 +35,10 @@ public class MainActivity extends AppCompatActivity {
 
     private ImageView c_piano,c_guitar, c_rum, c_trumpet, c_violin;
 
+    //
+    private IUserServices userServices;
+    private CommandProcessor commandProcessor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -44,9 +51,17 @@ public class MainActivity extends AppCompatActivity {
          //Tạo mới product manager
         productManager = new ProductManager(this);
 
+        //Tạo mới IUserServices và CommandProccessor
+        userServices = new UserServices(this);
+        commandProcessor = new CommandProcessor();
+
         //Khởi tạo recycle view và homeListAdapter
         recyclerView = findViewById(R.id.productListView_home);
         adapter = new Home_List_Adapter(this,productManager);
+
+        //Truyền commandProcessor và userServices cho adapter
+        adapter.setIUserServices(userServices);
+        adapter.setCommandProcessor(commandProcessor);
 
         // Set LayoutManager cho RecyclerView
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -71,10 +86,24 @@ public class MainActivity extends AppCompatActivity {
                 adapter.loadProduct();
             }
         });
+
+        //-------------XU LY KHI AN VAO PROFILE KIEM TRA
+        // NEU KO THI VAO TRANG LOGIN
+        // NEU CO THI VAO TRANG PROFILE
         bntLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                direct(LoginActivity.class);
+
+//                direct(LoginActivity.class);
+                boolean checkResult = adapter.checkExistUser();
+                if(checkResult)
+                {
+                    direct(ProfileActivity.class);
+                }
+                else
+                {
+                    direct(LoginActivity.class);
+                }
             }
         });
         btnCart.setOnClickListener(new View.OnClickListener() {

@@ -21,6 +21,6 @@ public class ListUser extends CommandUser {
     @Override
     public List<UserSQL> getAllUser()
     {
-        return null;
+        return userServices.getAllUser();
     }
 }

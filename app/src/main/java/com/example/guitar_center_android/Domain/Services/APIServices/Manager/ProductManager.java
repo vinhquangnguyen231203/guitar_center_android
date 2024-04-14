@@ -33,6 +33,8 @@ public class ProductManager {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
                 if (response.isSuccessful() && response.body() != null) {
+
+                    Log.d("getAllProduct_Json",response.body().toString());
                     callback.onResponse(call,Response.success(response.body()));
                 } else {
                     Toast.makeText(context, "Lấy danh sách sản phẩm thất bại !",Toast.LENGTH_SHORT).show();
@@ -53,6 +55,8 @@ public class ProductManager {
             @Override
             public void onResponse(Call<Product> call, Response<Product> response) {
                 if (response.isSuccessful() && response.body() != null) {
+
+                    Log.d("getProductById_Json",response.body().toString());
                     callback.onResponse(call,Response.success(response.body()));
                 } else {
                     Toast.makeText(context, "Lấy sản phẩm thất bại !",Toast.LENGTH_SHORT).show();
@@ -73,6 +77,8 @@ public class ProductManager {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if (response.isSuccessful() && response.body() != null) {
+
+                    Log.d("getProductImage",response.body().toString());
                     callback.onResponse(call,Response.success(response.body()));
                 } else {
                     Toast.makeText(context, "Lấy ảnh sản phẩm thất bại !",Toast.LENGTH_SHORT).show();

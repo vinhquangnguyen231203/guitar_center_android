@@ -17,7 +17,7 @@ public interface ProductAPIServices {
     Call<List<Product>> getAllProducts();
 
     //Người dùng xem chi tiết sản phẩm
-    @GET("products/{:id}")
+    @GET("products/{id}")
     Call<Product>  getProductById(@Path("id") String id);
 
     //Lấy hình ảnh sản phẩm

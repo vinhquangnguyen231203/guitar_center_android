@@ -74,10 +74,11 @@ public class UserRepository implements IUserRepository {
 
     @Override
     public List<UserSQL> getAllUser() {
-        String sql = "SELECT * FROM USER";
-
         //Tạo 1 list để lấy dữ liệu
         List<UserSQL> userList = new ArrayList<>();
+        String sql = "SELECT * FROM USER";
+
+
         Cursor cursor = database.rawQuery(sql, null);
         if(((Cursor)cursor).moveToFirst())
         {
@@ -91,6 +92,7 @@ public class UserRepository implements IUserRepository {
             while (cursor.moveToNext());
         }
         while (cursor.moveToNext());
+        cursor.close();
         return userList;
     }
 }

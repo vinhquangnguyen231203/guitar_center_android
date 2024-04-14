@@ -10,8 +10,10 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.guitar_center_android.Domain.Services.APIServices.Manager.ProductManager;
 import com.example.guitar_center_android.Domain.Services.Implementation.CartServices;
 import com.example.guitar_center_android.Domain.Services.Interface.ICartServices;
+import com.example.guitar_center_android.Presentation.Adapter.ProductDetails_Adapter;
 import com.example.guitar_center_android.Presentation.Controller.Command.CommandProcessor;
 import com.example.guitar_center_android.R;
 import com.google.android.material.button.MaterialButton;
@@ -28,9 +30,12 @@ public class DetailsActivity extends AppCompatActivity {
 
     private ImageButton btnSub, btnAdd;
 
+    private ProductManager productManager;
+    private ICartServices cartServices;
+    private CommandProcessor commandProcessor;
 
-
-    private int count = 0;
+    private ProductDetails_Adapter productDetailsAdapter;
+    private int count;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,6 +76,7 @@ public class DetailsActivity extends AppCompatActivity {
                 .into(imgProduct);
 
         //Thực hiện quay về trang chủ
+        count = 0;
         txtBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,13 +87,16 @@ public class DetailsActivity extends AppCompatActivity {
         });
 
         //---------Thực hiện tăng giảm số lượng
+        //Tăng số lượng sản phẩm
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                count+=1;
+                count += 1;
                 txtProductUnit.setText(String.valueOf(count + 1));
             }
         });
+
+        //Giảm số lượng sản phẩm
         btnSub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,6 +110,30 @@ public class DetailsActivity extends AppCompatActivity {
                     txtProductUnit.setText(String.valueOf(count));
                 }
 
+            }
+        });
+
+        //--------------- XỬ LÝ THÊM SẢN PHẨM VÀO GIỎ HÀNG
+
+        //Tạo mới ProductManager
+        productManager = new ProductManager(this);
+
+        //Tạo mới đối tượng productDetails_Adapter
+        productDetailsAdapter = new ProductDetails_Adapter(this,productManager);
+
+        //Tạo mới đối tượng cartServices và commandProcessor
+        cartServices = new CartServices(this);
+        commandProcessor = new CommandProcessor();
+
+        //Truyền cartServices và commandProcessor vào adapter
+        productDetailsAdapter.setCartServices(cartServices);
+        productDetailsAdapter.setCommandProcessor(commandProcessor);
+
+        //Thực hiện hành động
+        btnAddCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                productDetailsAdapter.insertProductToCart(productId,Integer.parseInt(txtProductUnit.getText().toString()));
             }
         });
     }

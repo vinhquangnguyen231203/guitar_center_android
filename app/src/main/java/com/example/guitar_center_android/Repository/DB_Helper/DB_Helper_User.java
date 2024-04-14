@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DB_Helper_User extends SQLiteOpenHelper {
     // Instance Fields
-    private static final String DATABASE_NAME = "guitar.db";
+    private static final String DATABASE_NAME = "guitar_user.db";
     private static final int DATABASE_VERSION = 1;
     private static final String CREATE_DATABASE_User = "CREATE TABLE USER (" +
             "userName TEXT PRIMARY KEY," +

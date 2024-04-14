@@ -1,6 +1,7 @@
 package com.example.guitar_center_android.Domain.Services.APIServices.Manager;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.guitar_center_android.Domain.Services.APIServices.Interface.OrderAPIServices;
@@ -34,6 +35,8 @@ public class OrderManager {
             @Override
             public void onResponse(Call<OrderRequest> call, Response<OrderRequest> response) {
                 if (response.isSuccessful() && response.body() != null) {
+
+                    Log.d("addOrder_Json",response.body().toString());
                     callback.onResponse(call,Response.success(response.body()));
                 } else {
                     Toast.makeText(context, "Đặt hàng thất bại !",Toast.LENGTH_SHORT).show();
@@ -54,6 +57,8 @@ public class OrderManager {
             @Override
             public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
                 if (response.isSuccessful() && response.body() != null) {
+
+                    Log.d("getAllMyOrders_Json",response.body().toString());
                     callback.onResponse(call,Response.success(response.body()));
                 } else {
                     Toast.makeText(context, "Lấy đơn hàng thất bại !",Toast.LENGTH_SHORT).show();
@@ -74,6 +79,8 @@ public class OrderManager {
             @Override
             public void onResponse(Call<List<OrderDetail>> call, Response<List<OrderDetail>> response) {
                 if (response.isSuccessful() && response.body() != null) {
+
+                    Log.d("getOrderDetails_Json",response.body().toString());
                     callback.onResponse(call,Response.success(response.body()));
                 } else {
                     Toast.makeText(context, "Lấy đơn hàng thất bại !",Toast.LENGTH_SHORT).show();

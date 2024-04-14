@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 public class DB_Helper_Cart extends SQLiteOpenHelper {
     //Instane Fields
-    private static final String DATABASE_NAME = "guitar_center.db";
+    private static final String DATABASE_NAME = "guitar_cart.db";
     private static final int DATABASE_VERSION = 1;
     private static final String CREATE_DATABASE_CART = "CREATE TABLE CART (" +
             "id_product TEXT PRIMARY KEY," +

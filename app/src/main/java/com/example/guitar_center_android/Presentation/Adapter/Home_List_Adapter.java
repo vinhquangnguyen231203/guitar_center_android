@@ -3,6 +3,7 @@ package com.example.guitar_center_android.Presentation.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +17,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.guitar_center_android.Domain.Services.APIServices.Manager.ProductManager;
+import com.example.guitar_center_android.Domain.Services.Interface.IUserServices;
 import com.example.guitar_center_android.Domain.model.Category;
 import com.example.guitar_center_android.Domain.model.Product;
+import com.example.guitar_center_android.Domain.model.UserSQL;
 import com.example.guitar_center_android.Presentation.Activity.DetailsActivity;
 import com.example.guitar_center_android.Presentation.Activity.MainActivity;
+import com.example.guitar_center_android.Presentation.Controller.Command.CommandProcessor;
+import com.example.guitar_center_android.Presentation.Controller.Functions.ListUser;
 import com.example.guitar_center_android.R;
 import com.squareup.picasso.Picasso;
 
@@ -31,10 +36,15 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Home_List_Adapter extends RecyclerView.Adapter<Home_List_Adapter.ProductViewHolder> {
-
+    //Instance fields
     private List<Product> productList;
     private Context context;
     private ProductManager productManager;
+
+    //Instance fields xử lý sqlite
+    private IUserServices userServices;
+    private CommandProcessor commandProcessor;
+
 
     public  Home_List_Adapter(Context context,ProductManager productManager){
         this.context = context;
@@ -172,6 +182,38 @@ public class Home_List_Adapter extends RecyclerView.Adapter<Home_List_Adapter.Pr
     public void setProductList(List<Product> productList) {
         this.productList = productList;
         notifyDataSetChanged();
+    }
+
+    //-----LAY DU LIEU IUSERSERVICES VA COMMANDPROCESSOR
+    public  void setIUserServices(IUserServices userServices)
+    {
+        this.userServices = userServices;
+    }
+    public  void setCommandProcessor(CommandProcessor commandProcessor)
+    {
+        this.commandProcessor = commandProcessor;
+    }
+
+    //----------- KIEM TRA CO TON TAI USER KO
+    public  boolean checkExistUser() {
+        List<UserSQL> userSQLList = commandProcessor.getAllUser(new ListUser(userServices));
+
+        if (userSQLList == null) {
+            Log.d("check_userSQLList", "Du lieu trong");
+        } else
+        {
+            //Kiểm tra dữ liệu trong userSQLList
+            Log.d("check_userSQLList",userSQLList.toString());
+        }
+
+        if(userSQLList.size() == 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 }
 

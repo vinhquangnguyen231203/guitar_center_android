@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.SearchView;
 
 import com.example.guitar_center_android.Domain.Services.APIServices.Manager.ProductManager;
 import com.example.guitar_center_android.Domain.model.Product;
@@ -138,7 +139,23 @@ public class MainActivity extends AppCompatActivity {
 
         //---------- Xu ly loc danh sach theo tu khoa tim kiem
         //----------- Nho quy dinh lai position cua item sau khi loc
+        SearchView searchView = findViewById(R.id.search);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
 
+            public boolean onQueryTextChange(String newText) {
+                if(newText == null || newText.isEmpty()){
+                    adapter.loadProduct();
+                } else {
+                    List<Product> searchResult = adapter.searchProduct(newText);
+                    adapter.setProductList(searchResult);
+                }
+                return true;
+            }
+        });
     }
 
     //Hàm direct để chuyển hướng

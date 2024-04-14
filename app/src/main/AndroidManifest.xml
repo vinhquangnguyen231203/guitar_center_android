@@ -50,6 +50,13 @@
             <!-- Intent-filter (nếu cần) -->
         </activity>
 
+        <!-- OrderHistoryActivity -->
+        <activity
+            android:name=".Presentation.Activity.OrderStatusActivity"
+            android:exported="true">
+            <!-- Intent-filter (nếu cần) -->
+        </activity>
+
     </application>
 <!--Fix Android Manifest-->
 </manifest>

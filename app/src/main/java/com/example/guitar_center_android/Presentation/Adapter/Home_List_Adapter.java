@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,9 +19,11 @@ import com.example.guitar_center_android.Domain.Services.APIServices.Manager.Pro
 import com.example.guitar_center_android.Domain.model.Category;
 import com.example.guitar_center_android.Domain.model.Product;
 import com.example.guitar_center_android.Presentation.Activity.DetailsActivity;
+import com.example.guitar_center_android.Presentation.Activity.MainActivity;
 import com.example.guitar_center_android.R;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -144,6 +148,32 @@ public class Home_List_Adapter extends RecyclerView.Adapter<Home_List_Adapter.Pr
                 Toast.makeText(context, t.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+//    public void  searchProduct(String text){
+//
+//        String searchText = text.toLowerCase().trim();
+//        for (Product product : productList) {
+//            if (product.getProductName().toLowerCase().contains(searchText)) {
+//                productList.add(product);
+//            }
+//        }
+//    }
+    public List<Product> searchProduct(String text){
+        List<Product> searchResult = new ArrayList<>();
+        String searchText = text.toLowerCase().trim();
+        for (Product product : productList) {
+            if (product.getProductName().toLowerCase().contains(searchText)) {
+                searchResult.add(product);
+            }
+        }
+        return searchResult;
+    }
+
+    //cập nhật dnah saách sản phẩm
+    public void setProductList(List<Product> productList) {
+        this.productList = productList;
+        notifyDataSetChanged();
     }
 }
 

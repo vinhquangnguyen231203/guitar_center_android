@@ -29,8 +29,8 @@ public class OrderManager {
     }
 
     //Đặt hàng
-    public  void addOrder(OrderRequest orderRequest, Callback<OrderRequest> callback){
-        Call<OrderRequest> call = orderAPIServices.addOrder(orderRequest);
+    public  void addOrder(String userName, OrderRequest orderRequest, Callback<OrderRequest> callback){
+        Call<OrderRequest> call = orderAPIServices.addOrder(userName,orderRequest);
         call.enqueue(new Callback<OrderRequest>() {
             @Override
             public void onResponse(Call<OrderRequest> call, Response<OrderRequest> response) {
@@ -51,8 +51,8 @@ public class OrderManager {
     }
 
     //Xem danh sách đơn hàng của người dùng
-    public void getAllMyOrders(Callback<List<Order>> callback){
-        Call<List<Order>> call = orderAPIServices.getAllMyOrders();
+    public void getAllMyOrders(String userName,Callback<List<Order>> callback){
+        Call<List<Order>> call = orderAPIServices.getAllMyOrders(userName);
         call.enqueue(new Callback<List<Order>>() {
             @Override
             public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
@@ -73,8 +73,8 @@ public class OrderManager {
     }
 
     //Xem chi tiết đơn hàng
-    public  void geOrderDetails(String id, Callback<List<OrderDetail>> callback){
-        Call<List<OrderDetail>> call = orderAPIServices.getOrderDetails(id);
+    public  void getOrderDetails(String userName, String id, Callback<List<OrderDetail>> callback){
+        Call<List<OrderDetail>> call = orderAPIServices.getOrderDetails(userName,id);
         call.enqueue(new Callback<List<OrderDetail>>() {
             @Override
             public void onResponse(Call<List<OrderDetail>> call, Response<List<OrderDetail>> response) {

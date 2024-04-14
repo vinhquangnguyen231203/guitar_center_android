@@ -88,18 +88,7 @@ public class Order_Adapter extends RecyclerView.Adapter<Order_Adapter.OrderViewH
 
     //load danh sách order
     public void loadOrder(){
-        orderManager.getAllMyOrders(new Callback<List<Order>>() {
-            @Override
-            public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
-                orderList = response.body();
 
-            }
-
-            @Override
-            public void onFailure(Call<List<Order>> call, Throwable t) {
-                Toast.makeText(context,t.getMessage(),Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     //chuyển hướng đến orderDetails

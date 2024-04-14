@@ -13,6 +13,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Path;
 
 
 public interface UserAPIServices {
@@ -25,14 +26,20 @@ public interface UserAPIServices {
     @POST("users")
     Call<User> loginUser(@Body LoginRequest loginRequest);
 
+
+
     // sau khi đăng nhập sẽ hiện thông tin người dùng
-    //Sử dụng session
-    @GET("users/me")
-    Call<User>  getUserInfor();
+    // @GET("users/me")
+    // Call<User>  getUserInfor();
+
+    @GET("users/{username}")
+    Call<User> getUserInfor(@Path("username") String username);
 
     //người dùng chỉnh sửa thông tin hoặc thay đổi mật khẩu
-    @PUT("users/update-infor")
-    Call<Response>  updateUserInfor(@Body User user);
+    // @PUT("users/update-infor")
+    // Call<Response>  updateUserInfor(@Body User user);
+    @PUT("users/{username}/update-infor")
+    Call<User> updateUserInfor(@Path("username") String username , @Body User user);
 
     // người dùng đăng xuất
     @GET("users/logout")

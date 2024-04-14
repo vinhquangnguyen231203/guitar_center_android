@@ -56,8 +56,6 @@ public class ProfileActivity extends AppCompatActivity {
                 //cập nhật thông tin người dùng
                 profileAdapter.updateUserInfor();
 
-                //load lại thông tin người dùng sau khi cập nhật
-                profileAdapter.getUserInfor();
             }
         });
         // quay trở về trang home

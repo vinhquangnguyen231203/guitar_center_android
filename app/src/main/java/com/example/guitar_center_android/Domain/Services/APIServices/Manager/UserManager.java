@@ -96,9 +96,9 @@ public class UserManager {
 //        });
 //    }
 
-    public void getUserInfor(Callback<User> callback){
+    public void getUserInfor(String userName, Callback<User> callback){
         // Gọi API để lấy thông tin người dùng
-        Call<User> call = userAPIServices.getUserInfor();
+        Call<User> call = userAPIServices.getUserInfor(userName);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
@@ -121,21 +121,23 @@ public class UserManager {
     }
 
     //Sửa thông tin cá nhân
-    public  void updateUserInfor(User user ,Callback<Response> callback){
-        Call<Response> call = userAPIServices.updateUserInfor(user);
-        call.enqueue(new Callback<Response>() {
+    public  void updateUserInfor(String userName,User user ,Callback<User> callback){
+        Call<User> call = userAPIServices.updateUserInfor(userName,user);
+        call.enqueue(new Callback<User>() {
             @Override
-            public void onResponse(Call<Response> call, Response<Response> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    Log.d("updateInfor_Json", new Gson().toJson(response.body()));
-                    callback.onResponse(call, Response.success(response.body()));
-                } else {
-                    Toast.makeText(context, "Cập nhật thất bại !",Toast.LENGTH_SHORT).show();
-                }
+            public void onResponse(Call<User> call, Response<User> response) {
+//                if (response.isSuccessful() && response.body() != null) {
+//                    Log.d("updateInfor_Json", new Gson().toJson(response.body()));
+//                    callback.onResponse(call, Response.success(response.body()));
+//                } else {
+//                    Toast.makeText(context, "Cập nhật thất bại !",Toast.LENGTH_SHORT).show();
+//                }
+                Log.d("updateInfor_Json", new Gson().toJson(response.body()));
+                callback.onResponse(call, Response.success(response.body()));
             }
 
             @Override
-            public void onFailure(Call<Response> call, Throwable t) {
+            public void onFailure(Call<User> call, Throwable t) {
                 callback.onFailure(call,t);
             }
         });

@@ -12,5 +12,5 @@ public interface ICartRepository {
     boolean deleteCart(String id_Product);
     boolean updateCart(Product product);
     List<Product> getAllCart();
-
+    boolean deleteAllCart();
 }

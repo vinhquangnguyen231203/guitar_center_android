@@ -15,15 +15,19 @@ import android.widget.Toast;
 import com.example.guitar_center_android.Domain.Services.APIServices.Manager.UserManager;
 import com.example.guitar_center_android.Domain.Services.Interface.IUserServices;
 import com.example.guitar_center_android.Domain.model.User;
+import com.example.guitar_center_android.Domain.model.UserSQL;
 import com.example.guitar_center_android.Presentation.Activity.MainActivity;
 import com.example.guitar_center_android.Presentation.Activity.ProfileActivity;
 import com.example.guitar_center_android.Presentation.Controller.Command.CommandProcessor;
+import com.example.guitar_center_android.Presentation.Controller.Functions.DeleteAllCart;
 import com.example.guitar_center_android.Presentation.Controller.Functions.DeleteAllUser;
+import com.example.guitar_center_android.Presentation.Controller.Functions.ListUser;
 import com.example.guitar_center_android.R;
 import com.google.gson.Gson;
 
 import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import retrofit2.Call;
@@ -35,6 +39,7 @@ public class Profile_Adapter {
     private UserManager userManager;
     private EditText textViewUsername,textViewFullname, textViewPassword, textViewPhone, textViewBirth, textViewAddress;
 
+    private String userName;
     private IUserServices userServices;
     private CommandProcessor commandProcessor;
     public  Profile_Adapter(Context context, UserManager userManager){
@@ -44,6 +49,8 @@ public class Profile_Adapter {
 
     public void getUserInfor(){
 
+        getUserName();
+
         //lay id giao dien
         textViewUsername = ((ProfileActivity) context).findViewById(R.id.txt_profile_username);
         textViewFullname = ((ProfileActivity) context).findViewById(R.id.txt_profile_fullname);
@@ -52,37 +59,39 @@ public class Profile_Adapter {
         textViewBirth = ((ProfileActivity) context).findViewById(R.id.txt_profile_birth);
         textViewAddress = ((ProfileActivity) context).findViewById(R.id.txt_profile_address);
 
+        //Lấy userName từ sqlite
 
-        // Gọi hàm getUserInfor() từ UserManager sau khi đăng nhập thành công
-        userManager.getUserInfor(new Callback<User>() {
+        //Lấy thông tin tu username
+        userManager.getUserInfor(userName, new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                // Xử lý response từ server
-                if (response.isSuccessful() && response.body() != null) {
-                    // Lâấy thông tin người dùng
-                    User user = response.body();
-                    // Hiển thị thông tin người dùng lên các EditText
-                    textViewUsername.setText(user.getUsername());
-                    textViewFullname.setText(user.getFullname());
-                    textViewPassword.setText(user.getPassword());
-                    textViewPhone.setText(user.getPhone());
-                    textViewBirth.setText(user.getBirth());
-                    textViewAddress.setText(user.getAddress());
-
-                } else {
-                    Toast.makeText(context, "Lấy thông tin cá nhân thất bại!", Toast.LENGTH_SHORT).show();
-                }
+                User user = response.body();
+                textViewUsername.setText(user.getUsername());
+                textViewFullname.setText(user.getFullname());
+                textViewPassword.setText(user.getPassword());
+                textViewPhone.setText(user.getPhone());
+                textViewBirth.setText(user.getBirth());
+                textViewAddress.setText(user.getAddress());
             }
+
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(context, "Lấy thông tin cá nhân thất bại: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
 
     }
 
     public void updateUserInfor() {
+        //Lay id
+        textViewUsername = ((ProfileActivity) context).findViewById(R.id.txt_profile_username);
+        textViewFullname = ((ProfileActivity) context).findViewById(R.id.txt_profile_fullname);
+        textViewPassword = ((ProfileActivity) context).findViewById(R.id.txt_profile_password);
+        textViewPhone = ((ProfileActivity) context).findViewById(R.id.txt_profile_phone);
+        textViewBirth = ((ProfileActivity) context).findViewById(R.id.txt_profile_birth);
+        textViewAddress = ((ProfileActivity) context).findViewById(R.id.txt_profile_address);
+
+
         // Lấy thông tin mới từ EditText
         String username = textViewUsername.getText().toString();
         String fullname = textViewFullname.getText().toString();
@@ -90,6 +99,11 @@ public class Profile_Adapter {
         String phone = textViewPhone.getText().toString();
         String birth = textViewBirth.getText().toString();
         String address = textViewAddress.getText().toString();
+
+        if(username == ""||fullname == ""||password == ""||phone == ""||birth == ""||address == ""){
+            Toast.makeText(context, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         // Kiểm tra xem ngày sinh có đúng định dạng không
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
@@ -107,23 +121,28 @@ public class Profile_Adapter {
         User updatedUser = new User(username, password, fullname, phone, address, "", dateFormat.format(birthDate), "");
 
         // Gọi phương thức updateUserInfor từ UserManager
-        userManager.updateUserInfor(updatedUser, new Callback<Response>() {
+
+        getUserName();
+
+        userManager.updateUserInfor(userName, updatedUser, new Callback<User>() {
             @Override
-            public void onResponse(Call<Response> call, Response<Response> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    // Xử lý khi cập nhật thành công
-                    Toast.makeText(context, "Cập nhật thông tin thành công!", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(context, "Cập nhật thất bại!", Toast.LENGTH_SHORT).show();
+            public void onResponse(Call<User> call, Response<User> response) {
+                if(response.body() != null && response.isSuccessful())
+                {
+                    Toast.makeText(context, "Cập nhật thông tin thành công", Toast.LENGTH_SHORT).show();
+                    getUserInfor();
+                }
+                else {
+                    Toast.makeText(context, "Cập nhật thông tin thất bại", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<Response> call, Throwable t) {
-                // Xử lý khi gặp lỗi trong quá trình cập nhật
-                Toast.makeText(context, "Cập nhật thất bại: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<User> call, Throwable t) {
+                Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 
     //----------LAY DU LIEU CHO userServices, commandProcessor
@@ -188,8 +207,21 @@ public class Profile_Adapter {
         else{
             Toast.makeText(context, "Xảy ra lỗi hệ thống", Toast.LENGTH_SHORT).show();
         }
+
+        boolean checkCart = commandProcessor.executeCart(new DeleteAllCart());
     }
 
+    //-------- Ham lay username
+    private void getUserName()
+    {
+        List<UserSQL> userSQLList = commandProcessor.getAllUser(new ListUser(userServices));
+
+        for (UserSQL user: userSQLList)
+        {
+            userName = user.getUserName();
+        }
+
+    }
 
 
 }

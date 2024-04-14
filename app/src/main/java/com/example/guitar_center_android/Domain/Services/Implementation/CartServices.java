@@ -48,4 +48,9 @@ public class CartServices implements ICartServices {
     public List<Product> getAllCart() {
         return cartRepository.getAllCart();
     }
+
+    @Override
+    public boolean deleteAllCart() {
+        return cartRepository.deleteAllCart();
+    }
 }

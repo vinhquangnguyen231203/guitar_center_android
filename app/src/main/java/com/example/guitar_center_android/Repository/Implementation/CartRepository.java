@@ -115,4 +115,17 @@ public class CartRepository implements ICartRepository {
         //rs.close();
         return productList;
     }
+
+    @Override
+    public boolean deleteAllCart() {
+        String sql = "DELETE * FROM CART";
+        int check = database.delete("CART",null,null);
+
+        if (check > 0)
+        {
+            return  true;
+        }
+
+        return false;
+    }
 }

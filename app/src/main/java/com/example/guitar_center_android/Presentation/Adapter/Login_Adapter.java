@@ -42,9 +42,9 @@ public class Login_Adapter {
         if(username.isEmpty() || password.isEmpty()){
             Toast.makeText(context, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
         }else {
-            userManager.login(username, password, new Callback<Response<String>>() {
+            userManager.login(username, password, new Callback<User>() {
                 @Override
-                public void onResponse(Call<Response<String>> call, Response<Response<String>> response) {
+                public void onResponse(Call<User> call, Response<User> response) {
 //                    // Lưu session vào SharedPreferences sau khi đăng nhập thành công
 //                    SharedPreferences sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
 //                    SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -72,8 +72,8 @@ public class Login_Adapter {
                 }
 
                 @Override
-                public void onFailure(Call<Response<String>> call, Throwable t) {
-                    Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
+                public void onFailure(Call<User> call, Throwable t) {
+                    Toast.makeText(context, "Quang", Toast.LENGTH_SHORT).show();
                 }
             });
         }

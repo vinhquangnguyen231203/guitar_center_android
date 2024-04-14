@@ -51,11 +51,11 @@ public class UserManager {
     }
 
     //đăng nhập
-    public void login(String username, String password, Callback<Response<String>> callback) {
-        Call<Response<String>> call = userAPIServices.loginUser(new LoginRequest(username,password));
-        call.enqueue(new Callback<Response<String>>(){
+    public void login(String username, String password, Callback<User> callback) {
+        Call<User> call = userAPIServices.loginUser(new LoginRequest(username,password));
+        call.enqueue(new Callback<User>(){
             @Override
-            public void onResponse(Call<Response<String>> call, Response<Response<String>> response) {
+            public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     Log.d("login_Json",new Gson().toJson(response.body()));
                     callback.onResponse(call, Response.success(response.body()));
@@ -65,7 +65,7 @@ public class UserManager {
             }
 
             @Override
-            public void onFailure(Call<Response<String>> call, Throwable t) {
+            public void onFailure(Call<User> call, Throwable t) {
                 callback.onFailure(call,t);
             }
         });

@@ -2,6 +2,8 @@ package com.example.guitar_center_android.Domain.model;
 
 import java.util.Date;
 
+import retrofit2.http.Body;
+
 public class User {
     private String username;
     private String password;
@@ -9,10 +11,11 @@ public class User {
     private String phone;
     private String address;
     private String gender;
-    private Date birth;
+
+    private String birth;
     private String role;
 
-    public User(String username, String password, String fullname, String phone, String address, String gender, Date birth, String role) {
+    public User(String username, String password, String fullname, String phone, String address, String gender, String birth, String role) {
         this.username = username;
         this.password = password;
         this.fullname = fullname;
@@ -22,6 +25,7 @@ public class User {
         this.birth = birth;
         this.role = role;
     }
+
 
     public String getUsername() {
         return username;
@@ -71,11 +75,11 @@ public class User {
         this.gender = gender;
     }
 
-    public Date getBirth() {
+    public String getBirth() {
         return birth;
     }
 
-    public void setBirth(Date birth) {
+    public void setBirth(String  birth) {
         this.birth = birth;
     }
 

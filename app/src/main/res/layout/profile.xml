@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F5F5F5"
-    tools:context=".Activity.ProfileActivity">
+    tools:context=".Presentation.Activity.ProfileActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,7 +34,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
-                        android:id="@+id/imageView2"
+                        android:id="@+id/btn_profile_toHome"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -42,16 +42,6 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:srcCompat="@drawable/arrow" />
-
-                    <ImageView
-                        android:id="@+id/logout"
-                        android:layout_width="37dp"
-                        android:layout_height="40dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="5dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/btn_6" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -81,7 +71,7 @@
 
                 <LinearLayout
                     android:layout_width="360dp"
-                    android:layout_height="346dp"
+                    android:layout_height="446dp"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="70dp"
                     android:layout_marginEnd="24dp"
@@ -90,7 +80,30 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView37">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:orientation="horizontal">
 
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="25dp"
+                            android:layout_weight="1"
+                            android:text="Username"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/txt_profile_username"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_weight="1"
+                            android:text="dtu123"
+                            android:enabled="false"
+                            android:textStyle="bold" />
+                    </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -210,15 +223,15 @@
                         <EditText
                             android:id="@+id/txt_profile_address"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="75dp"
                             android:layout_marginStart="5dp"
                             android:layout_weight="1"
+                            android:inputType="textMultiLine"
+                            android:maxLines="5"
+                            android:minLines="1"
                             android:text="371 Nguyễn Kiệm, Gò Vấp, Thành Phố Hồ Chí Minh"
                             android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:inputType="textMultiLine"
-                            android:minLines="1"
-                            android:maxLines="5" /> <!-- Điều chỉnh số dòng tối thiểu và tối đa -->
+                            android:textStyle="bold" /> <!-- Điều chỉnh số dòng tối thiểu và tối đa -->
                     </LinearLayout>
                     <!-- Các LinearLayout khác ở dưới bạn có thể tuân theo cùng một cấu trúc -->
                 </LinearLayout>

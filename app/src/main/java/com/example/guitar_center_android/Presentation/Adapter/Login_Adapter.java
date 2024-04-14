@@ -9,9 +9,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.guitar_center_android.Domain.Services.APIServices.Manager.UserManager;
+import com.example.guitar_center_android.Domain.Services.Interface.IUserServices;
 import com.example.guitar_center_android.Domain.model.User;
+import com.example.guitar_center_android.Domain.model.UserSQL;
 import com.example.guitar_center_android.Presentation.Activity.LoginActivity;
 import com.example.guitar_center_android.Presentation.Activity.MainActivity;
+import com.example.guitar_center_android.Presentation.Controller.Command.CommandProcessor;
+import com.example.guitar_center_android.Presentation.Controller.Functions.InsertUser;
 import com.example.guitar_center_android.R;
 import com.google.gson.Gson;
 
@@ -23,6 +27,10 @@ public class Login_Adapter {
     private Context context;
     private UserManager userManager;
     private TextView textViewUsername, textViewPassword;
+
+    //Instance Field cho sqlite
+    private IUserServices userServices;
+    private CommandProcessor commandProcessor;
 
     private Button buttonLogin;
     public  Login_Adapter(Context context, UserManager userManager){
@@ -64,10 +72,33 @@ public class Login_Adapter {
                     // Lưu các thông tin khác nếu cần
                     editor.apply();
 
-                    Toast.makeText(context, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-                    // Chuyển hướng đến trang home nếu đăng nhập thành công
-                    Intent intent = new Intent(context, MainActivity.class);
-                    context.startActivity(intent);
+//                    Toast.makeText(context, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+//                    // Chuyển hướng đến trang home nếu đăng nhập thành công
+//                    Intent intent = new Intent(context, MainActivity.class);
+//                    context.startActivity(intent);
+
+                    //--------- Xử lý sqlite
+                    //Tao doi tuong userSQL
+                    String username = response.body().getUsername();
+                    String fullname = response.body().getFullname();
+
+                    // Kiểm tra có lấy dc dữ liệu k
+                    Log.d("user_fullname_json",username + " and " +fullname);
+                    UserSQL userSQL = new UserSQL(username,fullname);
+
+                    //Thêm đối tượng userSQl vào sqlite
+                    boolean checkResult_Login = commandProcessor.executeUser(new InsertUser(userServices,userSQL));
+
+                    if(checkResult_Login)
+                    {
+                        Toast.makeText(context, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(context, MainActivity.class);
+                        context.startActivity(intent);
+                    }
+                    else
+                    {
+                        Toast.makeText(context, "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
+                    }
 
                 }
 
@@ -78,5 +109,15 @@ public class Login_Adapter {
             });
         }
 
+    }
+
+    //Get userServices and commandProcessor
+    public void setIUserServices(IUserServices userServices)
+    {
+        this.userServices = userServices;
+    }
+    public void setCommandProcessor(CommandProcessor commandProcessor)
+    {
+        this.commandProcessor = commandProcessor;
     }
 }

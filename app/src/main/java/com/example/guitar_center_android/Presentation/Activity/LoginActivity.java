@@ -48,6 +48,8 @@ public class LoginActivity extends AppCompatActivity {
         userManager = new UserManager(this);
 
         loginAdapter = new Login_Adapter(this,userManager);
+        loginAdapter.setCommandProcessor(commandProcessor);
+        loginAdapter.setIUserServices(userServices);
 
         // Thuc hien hanh dong dang nhap
         btnLogin.setOnClickListener(new View.OnClickListener() {

@@ -13,7 +13,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/imgProduct_cart"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginLeft="20dp"
@@ -30,6 +30,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/productName_cart"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
@@ -45,6 +46,7 @@
                     android:textStyle="bold"
                     android:layout_marginLeft="130dp"/>
                 <TextView
+                    android:id="@+id/productPrice_cart"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="2.000.000,00"
@@ -72,6 +74,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/productTotalPrice_cart"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="80dp"
@@ -88,7 +91,7 @@
                     app:layout_constraintEnd_toEndOf="parent">
 
                     <TextView
-                        android:id="@+id/textView28"
+                        android:id="@+id/btnAdd_cart"
                         android:layout_width="28dp"
                         android:layout_height="28dp"
                         android:layout_marginEnd="8dp"
@@ -100,7 +103,7 @@
                         app:layout_constraintVertical_bias="0.516" />
 
                     <TextView
-                        android:id="@+id/textView29"
+                        android:id="@+id/unit_cart"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -109,31 +112,33 @@
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="@+id/textView28"
-                        app:layout_constraintEnd_toStartOf="@+id/textView28"
-                        app:layout_constraintStart_toEndOf="@+id/textView30"
-                        app:layout_constraintTop_toTopOf="@+id/textView28" />
+                        app:layout_constraintBottom_toBottomOf="@+id/btnAdd_cart"
+                        app:layout_constraintEnd_toStartOf="@+id/btnAdd_cart"
+                        app:layout_constraintStart_toEndOf="@+id/btnSub_cart"
+                        app:layout_constraintTop_toTopOf="@+id/btnAdd_cart" />
 
                     <TextView
-                        android:id="@+id/textView30"
+                        android:id="@+id/btnSub_cart"
                         android:layout_width="28dp"
                         android:layout_height="28dp"
                         android:layout_marginStart="8dp"
                         android:gravity="center"
                         android:text="-"
-                        app:layout_constraintBottom_toBottomOf="@+id/textView28"
+                        app:layout_constraintBottom_toBottomOf="@+id/btnAdd_cart"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/textView28" />
+                        app:layout_constraintTop_toTopOf="@+id/btnAdd_cart" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </RelativeLayout>
+
                 <TextView
+                    android:id="@+id/btnDelete_cart"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="-30dp"
                     android:text="Xoá sản phẩm"
                     android:textColor="#DD5050"
-                    android:textStyle="bold|italic"
-                    android:layout_marginTop="-30dp"
-                    android:layout_marginLeft="20dp"/>
+                    android:textStyle="bold|italic" />
         </LinearLayout>
         </LinearLayout>
 

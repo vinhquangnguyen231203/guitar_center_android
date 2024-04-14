@@ -10,6 +10,9 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.guitar_center_android.Domain.Services.Implementation.CartServices;
+import com.example.guitar_center_android.Domain.Services.Interface.ICartServices;
+import com.example.guitar_center_android.Presentation.Controller.Command.CommandProcessor;
 import com.example.guitar_center_android.R;
 import com.google.android.material.button.MaterialButton;
 import com.squareup.picasso.Picasso;
@@ -25,12 +28,15 @@ public class DetailsActivity extends AppCompatActivity {
 
     private ImageButton btnSub, btnAdd;
 
+
+
     private int count = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.product_details);
+
 
         //Lấy dữ liệu từ intent
         intent = getIntent();
@@ -49,6 +55,7 @@ public class DetailsActivity extends AppCompatActivity {
         imgProduct = findViewById(R.id.imgProduct_details);
         btnAdd = findViewById(R.id.btnAdd_details);
         btnSub = findViewById(R.id.btnSub_details);
+        btnAddCart = findViewById(R.id.btnAddCart_details);
 
         //Hiển thị thông tin sản phẩm
         txtProductName.setText(productName);
@@ -73,7 +80,7 @@ public class DetailsActivity extends AppCompatActivity {
             }
         });
 
-        //Thực hiện tăng số lượng
+        //---------Thực hiện tăng giảm số lượng
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

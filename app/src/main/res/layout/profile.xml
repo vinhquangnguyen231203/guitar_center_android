@@ -71,15 +71,17 @@
 
                 <LinearLayout
                     android:layout_width="360dp"
-                    android:layout_height="506dp"
+                    android:layout_height="550dp"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="70dp"
-                    android:layout_marginEnd="24dp"
+                    android:layout_marginEnd="30dp"
                     android:background="@color/cardview_light_background"
                     android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView37">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -100,10 +102,11 @@
                             android:layout_height="40dp"
                             android:layout_marginStart="5dp"
                             android:layout_weight="1"
-                            android:text="dtu123"
                             android:enabled="false"
+                            android:text="dtu123"
                             android:textStyle="bold" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -215,8 +218,8 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:layout_marginEnd="25dp"
+                            android:layout_weight="1"
                             android:text="Address"
                             android:textStyle="bold" />
 
@@ -233,6 +236,7 @@
                             android:textSize="16sp"
                             android:textStyle="bold" /> <!-- Điều chỉnh số dòng tối thiểu và tối đa -->
                     </LinearLayout>
+
                     <Button
                         android:id="@+id/btn_updateProfile"
                         android:layout_width="360dp"
@@ -240,7 +244,30 @@
                         android:text="Cập nhật"
                         android:textSize="20dp"
 
-                        app:backgroundTint="@color/black"
+                        app:backgroundTint="#493030"
+                        tools:layout_editor_absoluteX="54dp"
+                        tools:layout_editor_absoluteY="646dp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/cardview_default_elevation"
+                        android:orientation="horizontal"
+                        >
+
+
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/btn_logOut"
+                        android:layout_width="180dp"
+                        android:layout_height="70dp"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center"
+                        android:insetRight="0dp"
+                        android:text="Đăng xuất"
+                        android:textSize="20dp"
+                        app:backgroundTint="#AD1515"
                         tools:layout_editor_absoluteX="54dp"
                         tools:layout_editor_absoluteY="646dp" />
                     <!-- Các LinearLayout khác ở dưới bạn có thể tuân theo cùng một cấu trúc -->

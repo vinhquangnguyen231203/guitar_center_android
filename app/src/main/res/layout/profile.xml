@@ -71,7 +71,7 @@
 
                 <LinearLayout
                     android:layout_width="360dp"
-                    android:layout_height="446dp"
+                    android:layout_height="506dp"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="70dp"
                     android:layout_marginEnd="24dp"
@@ -233,31 +233,24 @@
                             android:textSize="16sp"
                             android:textStyle="bold" /> <!-- Điều chỉnh số dòng tối thiểu và tối đa -->
                     </LinearLayout>
+                    <Button
+                        android:id="@+id/btn_updateProfile"
+                        android:layout_width="360dp"
+                        android:layout_height="60dp"
+                        android:text="Cập nhật"
+                        android:textSize="20dp"
+
+                        app:backgroundTint="@color/black"
+                        tools:layout_editor_absoluteX="54dp"
+                        tools:layout_editor_absoluteY="646dp" />
                     <!-- Các LinearLayout khác ở dưới bạn có thể tuân theo cùng một cấu trúc -->
                 </LinearLayout>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="620dp"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:layout_editor_absoluteX="0dp"
-                >
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_updateProfile"
-                    android:layout_width="300dp"
-                    android:layout_height="60dp"
-                    android:textSize="20dp"
-                    android:text="Cập nhật"
-                    app:backgroundTint="@color/black"
-                    tools:layout_editor_absoluteX="55dp"
-                    tools:layout_editor_absoluteY="-2dp" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

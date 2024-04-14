@@ -57,6 +57,13 @@
             <!-- Intent-filter (nếu cần) -->
         </activity>
 
+        <!-- ProfileActivity -->
+        <activity
+            android:name=".Presentation.Activity.ProfileActivity"
+            android:exported="true">
+            <!-- Intent-filter (nếu cần) -->
+        </activity>
+
     </application>
 <!--Fix Android Manifest-->
 </manifest>

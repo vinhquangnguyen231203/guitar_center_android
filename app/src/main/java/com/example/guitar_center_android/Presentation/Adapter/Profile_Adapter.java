@@ -48,7 +48,7 @@ public class Profile_Adapter {
             public void onResponse(Call<User> call, Response<User> response) {
                 // Xử lý response từ server
                 if (response.isSuccessful() && response.body() != null) {
-                    // Hiển thị thông tin người dùng lên giao diện
+                    // Lâấy thông tin người dùng
                      User user = response.body();
                     // Hiển thị thông tin người dùng lên các EditText
                     textViewUsername.setText(user.getUsername());

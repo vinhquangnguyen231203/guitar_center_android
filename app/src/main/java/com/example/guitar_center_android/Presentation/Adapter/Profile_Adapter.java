@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.guitar_center_android.Domain.Services.APIServices.Manager.UserManager;
+import com.example.guitar_center_android.Domain.Services.Interface.ICartServices;
 import com.example.guitar_center_android.Domain.Services.Interface.IUserServices;
 import com.example.guitar_center_android.Domain.model.User;
 import com.example.guitar_center_android.Domain.model.UserSQL;
@@ -42,6 +43,7 @@ public class Profile_Adapter {
     private String userName;
     private IUserServices userServices;
     private CommandProcessor commandProcessor;
+    private ICartServices cartServices;
     public  Profile_Adapter(Context context, UserManager userManager){
         this.context = context;
         this.userManager = userManager;
@@ -154,7 +156,10 @@ public class Profile_Adapter {
     {
         this.commandProcessor = commandProcessor;
     }
-
+    public void setICartServices(ICartServices cartServices)
+    {
+        this.cartServices = cartServices;
+    }
 
     //Xử lý logout
     public void logOut()
@@ -198,17 +203,26 @@ public class Profile_Adapter {
         //Kiểm tra đã xóa dc chưa
         if (checkResult)
         {
-            //Chuyển hướng sang trang home
-            Intent intent = new Intent(context, MainActivity.class);
-            context.startActivity(intent);
+            boolean checkCart = commandProcessor.executeCart(new DeleteAllCart(cartServices));
+            if(checkCart)
+            {
+                //Chuyển hướng sang trang home
+                Intent intent = new Intent(context, MainActivity.class);
+                context.startActivity(intent);
 
-            Toast.makeText(context,"Bạn đã đăng xuất thành công", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"Bạn đã đăng xuất thành công", Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                Toast.makeText(context, "Xảy ra lỗi hệ thống", Toast.LENGTH_SHORT).show();
+            }
+
         }
         else{
             Toast.makeText(context, "Xảy ra lỗi hệ thống", Toast.LENGTH_SHORT).show();
         }
 
-        boolean checkCart = commandProcessor.executeCart(new DeleteAllCart());
+
     }
 
     //-------- Ham lay username

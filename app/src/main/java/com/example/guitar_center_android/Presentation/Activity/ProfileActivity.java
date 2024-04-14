@@ -10,7 +10,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.guitar_center_android.Domain.Services.APIServices.Manager.UserManager;
+import com.example.guitar_center_android.Domain.Services.Implementation.CartServices;
 import com.example.guitar_center_android.Domain.Services.Implementation.UserServices;
+import com.example.guitar_center_android.Domain.Services.Interface.ICartServices;
 import com.example.guitar_center_android.Domain.Services.Interface.IUserServices;
 import com.example.guitar_center_android.Presentation.Adapter.Profile_Adapter;
 import com.example.guitar_center_android.Presentation.Controller.Command.CommandProcessor;
@@ -23,6 +25,7 @@ public class ProfileActivity extends AppCompatActivity {
     private ImageView btnBackToHome;
     private Button btn_Logout;
     private IUserServices userServices;
+    private ICartServices cartServices;
     private CommandProcessor commandProcessor;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,13 +36,15 @@ public class ProfileActivity extends AppCompatActivity {
         userManager = new UserManager(this);
         profileAdapter = new Profile_Adapter(this, userManager);
 
-        //Khởi tạo userServices và commandProcessor
+        //Khởi tạo userServices và commandProcessor, cartServices
         userServices = new UserServices(this);
         commandProcessor = new CommandProcessor();
+        cartServices = new CartServices(this);
 
         //Truyền userServices và commandProcessor cho adapter
         profileAdapter.setIUserServices(userServices);
         profileAdapter.setCommandProcessor(commandProcessor);
+        profileAdapter.setICartServices(cartServices);
 
         // Gọi hàm getUserInfor từ Profile_Adapter
         profileAdapter.getUserInfor();

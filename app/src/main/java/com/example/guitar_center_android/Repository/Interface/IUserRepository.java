@@ -9,4 +9,6 @@ public interface IUserRepository {
     boolean deleteUser(String username);
     boolean updateUser(UserSQL user);
     List<UserSQL> getAllUser();
+
+    boolean deleteAllUser();
 }

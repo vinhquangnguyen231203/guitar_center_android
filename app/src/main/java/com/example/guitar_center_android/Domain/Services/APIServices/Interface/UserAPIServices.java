@@ -25,9 +25,8 @@ public interface UserAPIServices {
     @POST("users")
     Call<User> loginUser(@Body LoginRequest loginRequest);
 
-
-
     // sau khi đăng nhập sẽ hiện thông tin người dùng
+    //Sử dụng session
     @GET("users/me")
     Call<User>  getUserInfor();
 

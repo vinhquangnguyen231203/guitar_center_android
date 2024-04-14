@@ -95,4 +95,17 @@ public class UserRepository implements IUserRepository {
         cursor.close();
         return userList;
     }
+
+    @Override
+    public boolean deleteAllUser() {
+        String sql = "DELETE * FROM USER";
+        int check = database.delete("USER",null,null);
+
+        if (check > 0)
+        {
+            return  true;
+        }
+
+        return false;
+    }
 }

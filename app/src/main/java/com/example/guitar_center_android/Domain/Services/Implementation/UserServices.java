@@ -45,4 +45,9 @@ public class UserServices implements IUserServices {
     public List<UserSQL> getAllUser() {
         return userRepository.getAllUser();
     }
+
+    @Override
+    public boolean deleteAllUser() {
+        return userRepository.deleteAllUser();
+    }
 }

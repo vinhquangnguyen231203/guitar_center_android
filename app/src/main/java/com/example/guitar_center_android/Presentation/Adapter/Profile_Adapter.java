@@ -1,15 +1,24 @@
 package com.example.guitar_center_android.Presentation.Adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.guitar_center_android.Domain.Services.APIServices.Manager.UserManager;
+import com.example.guitar_center_android.Domain.Services.Interface.IUserServices;
 import com.example.guitar_center_android.Domain.model.User;
+import com.example.guitar_center_android.Presentation.Activity.MainActivity;
 import com.example.guitar_center_android.Presentation.Activity.ProfileActivity;
+import com.example.guitar_center_android.Presentation.Controller.Command.CommandProcessor;
+import com.example.guitar_center_android.Presentation.Controller.Functions.DeleteAllUser;
 import com.example.guitar_center_android.R;
 import com.google.gson.Gson;
 
@@ -26,6 +35,8 @@ public class Profile_Adapter {
     private UserManager userManager;
     private EditText textViewUsername,textViewFullname, textViewPassword, textViewPhone, textViewBirth, textViewAddress;
 
+    private IUserServices userServices;
+    private CommandProcessor commandProcessor;
     public  Profile_Adapter(Context context, UserManager userManager){
         this.context = context;
         this.userManager = userManager;
@@ -49,7 +60,7 @@ public class Profile_Adapter {
                 // Xử lý response từ server
                 if (response.isSuccessful() && response.body() != null) {
                     // Lâấy thông tin người dùng
-                     User user = response.body();
+                    User user = response.body();
                     // Hiển thị thông tin người dùng lên các EditText
                     textViewUsername.setText(user.getUsername());
                     textViewFullname.setText(user.getFullname());
@@ -114,5 +125,71 @@ public class Profile_Adapter {
             }
         });
     }
+
+    //----------LAY DU LIEU CHO userServices, commandProcessor
+    public void setIUserServices(IUserServices userServices)
+    {
+        this.userServices = userServices;
+    }
+    public void setCommandProcessor(CommandProcessor commandProcessor)
+    {
+        this.commandProcessor = commandProcessor;
+    }
+
+
+    //Xử lý logout
+    public void logOut()
+    {
+        //Hiện thị thông báo hỏi
+
+        //Tạo AlertDialog.Builder
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+        //Tạo tiêu đề và thông báo cho alert này
+        builder.setTitle("Thông báo đăng xuất");
+        builder.setMessage("Bạn có muốn đăng xuất không?");
+
+        //Thiết lập sự kiện yes/no khi click
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //Gọi hàm chooseLogOut
+                Profile_Adapter.this.chooseLogOut();
+            }
+        });
+
+        //Thiết lập button no
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //do nothing =))
+            }
+        });
+
+        //Tạo v hiển thị AlertDialog
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    //---- Hàm cho sự kiện khi ấn yes
+    private void chooseLogOut()
+    {
+        boolean checkResult = commandProcessor.executeUser(new DeleteAllUser(userServices));
+
+        //Kiểm tra đã xóa dc chưa
+        if (checkResult)
+        {
+            //Chuyển hướng sang trang home
+            Intent intent = new Intent(context, MainActivity.class);
+            context.startActivity(intent);
+
+            Toast.makeText(context,"Bạn đã đăng xuất thành công", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(context, "Xảy ra lỗi hệ thống", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
 
 }

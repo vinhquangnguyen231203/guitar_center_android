@@ -10,4 +10,5 @@ public interface IUserServices {
     boolean deleteUser(String userName);
     boolean updateUser(UserSQL user);
     List<UserSQL> getAllUser();
+    boolean deleteAllUser();
 }

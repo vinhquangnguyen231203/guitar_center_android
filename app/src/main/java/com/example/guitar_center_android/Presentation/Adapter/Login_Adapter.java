@@ -40,12 +40,13 @@ public class Login_Adapter {
 
         if(username.isEmpty() || password.isEmpty()){
             Toast.makeText(context, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+            return;
         }else {
             userManager.login(username, password, new Callback<User>() {
                 @Override
                 public void onResponse(Call<User> call, Response<User> response) {
 
-                    Log.d("login_Json",new Gson().toJson(response.body().toString()));
+
                     // Chuyển hướng đến trang home nếu đăng nhập thành công
                     Intent intent = new Intent(context, MainActivity.class);
                     context.startActivity(intent);

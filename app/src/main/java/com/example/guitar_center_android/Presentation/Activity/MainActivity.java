@@ -25,11 +25,20 @@ public class MainActivity extends AppCompatActivity {
     private ProductManager productManager;
     private RecyclerView recyclerView;
     private Home_List_Adapter adapter;
+    private Intent intent;
+
+    private String categoryId;
+
+    private ImageView c_piano,c_guitar, c_rum, c_trumpet, c_violin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //Khởi chạy content View
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //----------- Xử lý load tất cả danh sách
 
          //Tạo mới product manager
         productManager = new ProductManager(this);
@@ -45,13 +54,99 @@ public class MainActivity extends AppCompatActivity {
         // Tải danh sách sản phẩm từ API
         adapter.loadProduct();
 
-        ImageView bntLogin = findViewById(R.id.iv_profile);
+        //-------------- Xử lý chuyển hướng
+        // Lấy các id
+        ImageView bntLogin = findViewById(R.id.img_profile);
+        ImageView btnHome = findViewById(R.id.img_home);
+        ImageView btnCart = findViewById(R.id.img_cart);
+        ImageView btnOrder = findViewById(R.id.img_order);
+
+
+        //Xử lý action chuyển hướng
+        btnHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Load lại all danh sách sản phẩm
+                adapter.loadProduct();
+            }
+        });
         bntLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                direct(LoginActivity.class);
+            }
+        });
+        btnCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,CartActivity.class);
                 startActivity(intent);
             }
         });
+        btnOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        //------------- Xử lý load theo danh mục
+        //Lấy id của các category
+        c_piano = findViewById(R.id.category_p);
+        c_violin = findViewById(R.id.category_v);
+        c_trumpet = findViewById(R.id.category_t);
+        c_rum = findViewById(R.id.category_r);
+        c_guitar = findViewById(R.id.category_r);
+
+        //Xu ly su kien loc danh sach theo category
+        c_piano.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                categoryId = "P";
+                adapter.loadProductByCategory(categoryId);
+            }
+        });
+        c_violin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                categoryId = "V";
+                adapter.loadProductByCategory(categoryId);
+            }
+        });
+        c_guitar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                categoryId = "G";
+                adapter.loadProductByCategory(categoryId);
+            }
+        });
+
+        c_rum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                categoryId = "R";
+                adapter.loadProductByCategory(categoryId);
+            }
+        });
+
+        c_trumpet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                categoryId = "T";
+                adapter.loadProductByCategory(categoryId);
+            }
+        });
+
+        //---------- Xu ly loc danh sach theo tu khoa tim kiem
+        //----------- Nho quy dinh lai position cua item sau khi loc
+
     }
+
+    //Hàm direct để chuyển hướng
+    private void direct(Class cls)
+    {
+        intent = new Intent(MainActivity.this,cls);
+        startActivity(intent);
+    }
+
 }

@@ -115,7 +115,7 @@ public class Home_List_Adapter extends RecyclerView.Adapter<Home_List_Adapter.Pr
     }
 
     //Chuyển hướng đến ProductDetails
-    public void  dicrect_to_details(Product product)
+    private void  dicrect_to_details(Product product)
     {
         //Tạo intent
         Intent intent = new Intent(context,DetailsActivity.class);

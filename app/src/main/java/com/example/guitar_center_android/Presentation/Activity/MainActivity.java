@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         c_violin = findViewById(R.id.category_v);
         c_trumpet = findViewById(R.id.category_t);
         c_rum = findViewById(R.id.category_r);
-        c_guitar = findViewById(R.id.category_r);
+        c_guitar = findViewById(R.id.category_g);
 
         //Xu ly su kien loc danh sach theo category
         c_piano.setOnClickListener(new View.OnClickListener() {

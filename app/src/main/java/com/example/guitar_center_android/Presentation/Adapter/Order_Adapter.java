@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,7 +25,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Order_Adapter {
+public class Order_Adapter extends RecyclerView.Adapter<Order_Adapter.OrderViewHolder> {
     private Context context;
     private List<Order> orderList;
     private OrderManager orderManager;
@@ -35,14 +36,32 @@ public class Order_Adapter {
     }
 
 
-    public  OrderViewHolder onCreatViewHolder(@NonNull ViewGroup parent, int viewType){
+    public static  class OrderViewHolder extends RecyclerView.ViewHolder{
+        TextView textViewOrderId, textViewOrderStatus, textViewOrderdate, textViewOrderTotalPrice;
+        Button btnOrderDetail;
+        public  OrderViewHolder(View itemView){
+            super(itemView);
+            textViewOrderId = itemView.findViewById(R.id.txt_orderId);
+            textViewOrderdate = itemView.findViewById(R.id.txt_orderTime);
+            textViewOrderStatus = itemView.findViewById(R.id.txt_orderStatus);
+            textViewOrderTotalPrice = itemView.findViewById(R.id.txt_totalPrice);
+            btnOrderDetail = itemView.findViewById(R.id.btn_viewOrderDetail);
+        }
 
+
+    }
+
+
+    @NonNull
+    @Override
+    public OrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // LayoutInflater là một lớp dùng để chuyển đổi XML file thành các View objects trong Android
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_order, parent, false);
         return new OrderViewHolder(view);
-    };
+    }
 
-    public  void onBindViewHolder(OrderViewHolder holder, int position){
+    @Override
+    public void onBindViewHolder(@NonNull OrderViewHolder holder, int position) {
         Order order = orderList.get(position);
 
         //set data vào views của order
@@ -50,6 +69,14 @@ public class Order_Adapter {
         holder.textViewOrderdate.setText(order.getOrderDate());
         holder.textViewOrderStatus.setText(order.getStatus());
         holder.textViewOrderTotalPrice.setText((int) order.getTotalPrice());
+
+        //set sự kiện chuyển hướng vào order detail
+        holder.btnOrderDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                direct_to_orderDetails(order);
+            }
+        });
     }
 
     public int getItemCount() {
@@ -57,19 +84,7 @@ public class Order_Adapter {
         return orderList == null ? 0 : orderList.size();
     }
 
-    public static  class OrderViewHolder extends RecyclerView.ViewHolder{
-        TextView textViewOrderId, textViewOrderStatus, textViewOrderdate, textViewOrderTotalPrice;
 
-        public  OrderViewHolder(View itemView){
-            super(itemView);
-            textViewOrderId = itemView.findViewById(R.id.txt_orderId);
-            textViewOrderdate = itemView.findViewById(R.id.txt_orderTime);
-            textViewOrderStatus = itemView.findViewById(R.id.txt_orderStatus);
-            textViewOrderTotalPrice = itemView.findViewById(R.id.txt_totalPrice);
-        }
-
-
-    }
 
     //load danh sách order
     public void loadOrder(){
@@ -88,11 +103,12 @@ public class Order_Adapter {
     }
 
     //chuyển hướng đến orderDetails
-    private  void direct_to_orderDetails(List<Order> orderList ){
+    private  void direct_to_orderDetails(Order order ){
         //tạo intent
         Intent intent = new Intent(context, OrderDetailsActivity.class);
 
-
+        //đính kèm dữ liệu cần gửi
+        intent.putExtra("ORDER_ID", order.getOrderId());
 
         context.startActivity(intent);
     }

@@ -48,8 +48,6 @@ public class Home_List_Adapter extends RecyclerView.Adapter<Home_List_Adapter.Pr
     }
 
 
-
-
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
 

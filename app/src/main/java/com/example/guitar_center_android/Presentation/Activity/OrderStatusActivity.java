@@ -7,6 +7,7 @@ import android.widget.Button;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.guitar_center_android.Domain.Services.APIServices.Manager.OrderManager;
@@ -32,9 +33,18 @@ public class OrderStatusActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.order_list_view);
         adapter = new Order_Adapter(this, orderManager);
 
+        //set layout cho recycleview
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
 
-    //---------------xử lý chuyển hướng về trang home
+        //Tải danh sách sản phẩm từ API
+        adapter.loadOrder();
+
+        //Lấy các id
         Button btnHome = findViewById(R.id.btn_orderHistory_home);
+
+
+        //---------------xử lý chuyển hướng về trang home
         btnHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,6 +52,9 @@ public class OrderStatusActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+
     }
 
 

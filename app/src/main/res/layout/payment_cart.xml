@@ -24,7 +24,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycleview_cart"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="283dp"
             android:layout_weight="1" />
     </LinearLayout>
 
@@ -39,7 +39,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="#E8E2B2"
             android:orientation="vertical"
             android:padding="16dp">
@@ -48,7 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Thông tin đặt hàng"
-
+                android:layout_marginTop="10dp"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -61,8 +61,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Tên:"
-                    android:textStyle="bold"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/txtName_cart"
@@ -81,9 +81,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Số điện thoại:"
-                    android:textStyle="bold"
+                    android:textSize="16sp"
 
-                    android:textSize="16sp" />
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/txtPhone_number_cart"
@@ -96,15 +96,15 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
                 <TextView
-                    android:textStyle="bold"
-
                     android:layout_width="wrap_content"
+
                     android:layout_height="wrap_content"
                     android:text="Hình thức thanh toán:"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <RadioButton
                     android:id="@+id/txtPayment_cart"
@@ -124,11 +124,11 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Địa chỉ:"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/address_cart"
@@ -139,7 +139,24 @@
             </LinearLayout>
 
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
 
+        <TextView
+            android:layout_width="202dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="14dp"
+            android:text="Thành tiền:"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="10,000.00đ"
+            android:textSize="20sp" />
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
 
     <RelativeLayout

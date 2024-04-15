@@ -8,13 +8,23 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.guitar_center_android.Domain.Services.APIServices.Manager.OrderManager;
+import com.example.guitar_center_android.Domain.Services.APIServices.Manager.ProductManager;
+import com.example.guitar_center_android.Presentation.Adapter.OrderDetail_Adapter;
 import com.example.guitar_center_android.R;
 
 public class OrderDetailsActivity extends AppCompatActivity {
 private TextView txtOrderId, txtOrderdate ,txtOrderFullname, txtOrderPhone, txtOrderStatus, txtOrderAddress, txtOrderTotalPrice, btnBacktoOrder;
 
 private Intent intent;
+private OrderDetail_Adapter adapter;
+private OrderManager orderManager;
+private ProductManager productManager;
+
+private RecyclerView recyclerView;
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,14 +34,34 @@ private Intent intent;
         intent = getIntent();
 
 
-//        //lấy các id
-//        txtOrderId = findViewById(R.id.txt_orderDetail_orderId);
-//        txtOrderdate = findViewById(R.id.txt_orderDetail_orderTime);
-//        txtOrderFullname = findViewById(R.id.txt_orderDetail_fullname);
-//        txtOrderPhone = findViewById(R.id.txt_orderDetail_phone);
-//        txtOrderStatus = findViewById(R.id.txt_orderDetail_status);
-//        txtOrderAddress = findViewById(R.id.txt_orderDetail_address);
-//        txtOrderTotalPrice = findViewById(R.id.txt_orderDetail_totalPrice);
+
+
+        //Tạo mới OrderManager
+        orderManager = new OrderManager(this);
+
+        //Tao moi ProductManager
+        productManager = new ProductManager(this);
+
+        //Tạo mới adapter
+        adapter = new OrderDetail_Adapter(this,orderManager);
+
+        //Truyền data vào trong adapter
+        adapter.setIntent(intent);
+
+        //Truyen ProductManger cho adapter
+        adapter.setProductManager(productManager);
+
+
+        //Recycle view add adapter
+        recyclerView = findViewById(R.id.orderDetail_listView);
+        recyclerView.setAdapter(adapter);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
+
+        adapter.loadOrderDetails();
+
+        //------ FIND ID
         btnBacktoOrder = findViewById(R.id.btn_backToOrder);
 
 

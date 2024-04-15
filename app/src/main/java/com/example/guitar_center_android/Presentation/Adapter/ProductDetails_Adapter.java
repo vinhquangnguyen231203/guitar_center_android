@@ -72,6 +72,7 @@ public class ProductDetails_Adapter {
 
                     if(productToCheck == null)
                     {
+                        product.setUnit(unit);
                         boolean checkResult = commandProcessor.executeCart(
                                 new InsertCart(cartServices,product)
                         );
@@ -85,7 +86,7 @@ public class ProductDetails_Adapter {
                     }
                     else
                     {
-                        product.setUnit(product.getUnit() + productToCheck.getUnit());
+                        product.setUnit(unit + productToCheck.getUnit());
                         boolean checkResult = commandProcessor.executeCart(
                             new UpdateCart(cartServices,product)
                         );

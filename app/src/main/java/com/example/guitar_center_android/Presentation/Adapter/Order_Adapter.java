@@ -132,6 +132,7 @@ public class Order_Adapter extends RecyclerView.Adapter<Order_Adapter.OrderViewH
 
         //đính kèm dữ liệu cần gửi
         intent.putExtra("ORDER_ID", order.getOrderId());
+        intent.putExtra("USERNAME",username);
 
         context.startActivity(intent);
     }

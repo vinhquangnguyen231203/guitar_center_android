@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,6 +46,7 @@ public class Cart_Adapter extends RecyclerView.Adapter<Cart_Adapter.CartViewHold
     private CommandProcessor commandProcessor;
     private int count;
     private TextView txtName, txtPhoneNumber, txtAddress;
+
 
     private List<Integer> itemCountList;
 
@@ -282,5 +284,12 @@ public class Cart_Adapter extends RecyclerView.Adapter<Cart_Adapter.CartViewHold
     public void payment()
     {
 
+    }
+
+    //Kiểm tra thong tin
+    private boolean checkInfoisValid()
+    {
+
+        return false;
     }
 }

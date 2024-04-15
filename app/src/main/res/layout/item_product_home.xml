@@ -1,16 +1,19 @@
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="10dp">
+    android:padding="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:columnCount="2"
         android:rowCount="5"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <!-- Hình ảnh sản phẩm -->
         <ImageView
@@ -25,14 +28,17 @@
 
         <!-- Cột chứa các tiêu đề và nội dung -->
         <GridLayout
-            android:layout_width="215dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_row="0"
             android:layout_column="1"
             android:columnCount="2"
             android:paddingStart="16dp"
-
-            android:rowCount="5">
+            android:rowCount="5"
+            android:layout_marginLeft="90dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imgProduct_home_list"
+            app:layout_constraintTop_toTopOf="parent">
 
             <!-- Tiêu đề và nội dung ID -->
 
@@ -45,8 +51,8 @@
                 android:layout_height="wrap_content"
                 android:layout_row="1"
                 android:layout_column="1"
-                android:textSize="16sp"
                 android:text="Nguyễn Vĩnh Quang"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
 
@@ -59,8 +65,8 @@
                 android:layout_height="wrap_content"
                 android:layout_row="3"
                 android:layout_column="1"
-                android:textSize="18sp"
                 android:text="$100"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
 
@@ -71,9 +77,9 @@
                 android:layout_height="wrap_content"
                 android:layout_row="4"
                 android:layout_column="1"
-                android:textSize="15sp"
-                android:text="Add to Cart" />
+                android:text="Add to Cart"
+                android:textSize="15sp" />
 
         </GridLayout>
     </GridLayout>
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

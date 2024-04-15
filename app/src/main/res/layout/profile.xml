@@ -28,7 +28,7 @@
                     android:id="@+id/constraintLayout3"
                     android:layout_width="match_parent"
                     android:layout_height="360dp"
-                    android:background="@color/material_dynamic_neutral40"
+                    android:background="#71777C"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">

@@ -12,9 +12,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.guitar_center_android.Domain.Services.Interface.IUserServices;
 import com.example.guitar_center_android.Domain.model.OrderDetail;
 import com.example.guitar_center_android.Domain.model.Product;
+import com.example.guitar_center_android.Domain.model.UserSQL;
 import com.example.guitar_center_android.Presentation.Activity.OrderDetailsActivity;
+import com.example.guitar_center_android.Presentation.Controller.Command.CommandProcessor;
+import com.example.guitar_center_android.Presentation.Controller.Functions.ListUser;
 import com.example.guitar_center_android.R;
 import com.example.guitar_center_android.Domain.Services.APIServices.Manager.OrderManager;
 import com.example.guitar_center_android.Domain.model.Order;
@@ -29,6 +33,9 @@ public class Order_Adapter extends RecyclerView.Adapter<Order_Adapter.OrderViewH
     private Context context;
     private List<Order> orderList;
     private OrderManager orderManager;
+    private IUserServices userServices;
+    private CommandProcessor commandProcessor;
+    private String username;
 
     public  Order_Adapter(Context context, OrderManager orderManager){
         this.context = context;
@@ -68,12 +75,13 @@ public class Order_Adapter extends RecyclerView.Adapter<Order_Adapter.OrderViewH
         holder.textViewOrderId.setText(order.getOrderId());
         holder.textViewOrderdate.setText(order.getOrderDate());
         holder.textViewOrderStatus.setText(order.getStatus());
-        holder.textViewOrderTotalPrice.setText((int) order.getTotalPrice());
+        holder.textViewOrderTotalPrice.setText(String.valueOf(order.getTotalPrice()));
 
         //set sự kiện chuyển hướng vào order detail
         holder.btnOrderDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 direct_to_orderDetails(order);
             }
         });
@@ -84,11 +92,37 @@ public class Order_Adapter extends RecyclerView.Adapter<Order_Adapter.OrderViewH
         return orderList == null ? 0 : orderList.size();
     }
 
+    //---------HAM LAY IUserServices va CommandProcessor
+    public void setIUserServices(IUserServices userServices)
+    {
+        this.userServices = userServices;
+    }
+    public  void setICommandProcessor(CommandProcessor commandProcessor)
+    {
+        this.commandProcessor = commandProcessor;
+    }
 
 
     //load danh sách order
     public void loadOrder(){
+        List<UserSQL> userSQLList = commandProcessor.getAllUser(new ListUser(userServices));
 
+        for(UserSQL userSQL: userSQLList)
+        {
+            username = userSQL.getUserName();
+        }
+        orderManager.getAllMyOrders(username, new Callback<List<Order>>() {
+            @Override
+            public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
+                orderList = response.body();
+                notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<List<Order>> call, Throwable t) {
+                Toast.makeText(context, "Lấy danh sách thất bại", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     //chuyển hướng đến orderDetails

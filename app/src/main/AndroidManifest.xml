@@ -63,6 +63,12 @@
             android:exported="true">
             <!-- Intent-filter (nếu cần) -->
         </activity>
+        <!-- OrderDetailsActivity -->
+        <activity
+            android:name=".Presentation.Activity.OrderDetailsActivity"
+            android:exported="true">
+            <!-- Intent-filter (nếu cần) -->
+        </activity>
 
     </application>
 <!--Fix Android Manifest-->

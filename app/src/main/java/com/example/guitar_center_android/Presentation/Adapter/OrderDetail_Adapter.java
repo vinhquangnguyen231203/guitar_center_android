@@ -1,6 +1,7 @@
 package com.example.guitar_center_android.Presentation.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,9 @@ public class OrderDetail_Adapter extends RecyclerView.Adapter<OrderDetail_Adapte
     private Context context;
     private List<OrderDetail> orderDetailList;
     private OrderManager orderManager;
+
+    private  Intent intent;
+
 
     public  OrderDetail_Adapter(Context context, OrderManager orderManager){
         this.context = context;
@@ -47,6 +51,7 @@ public class OrderDetail_Adapter extends RecyclerView.Adapter<OrderDetail_Adapte
         holder.textViewProductUnit.setText(orderDetail.getUnit());
     }
 
+
     @Override
     public int getItemCount() {
         //trả về số lượng phần tử trong mảng
@@ -67,4 +72,17 @@ public class OrderDetail_Adapter extends RecyclerView.Adapter<OrderDetail_Adapte
 
         }
     }
+
+    //-------------- Lay intent tu OrderDetailsActivity
+    public  void setIntent(Intent intent)
+    {
+        this.intent = intent;
+    }
+
+    //----------- Load danh sách order details
+    public void loadOrderDetails()
+    {
+
+    }
+
 }

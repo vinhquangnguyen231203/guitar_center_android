@@ -88,11 +88,13 @@ public class DetailsActivity extends AppCompatActivity {
 
         //---------Thực hiện tăng giảm số lượng
         //Tăng số lượng sản phẩm
+        //---------Thực hiện tăng giảm số lượng
+        //Tăng số lượng sản phẩm
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 count += 1;
-                txtProductUnit.setText(String.valueOf(count + 1));
+                txtProductUnit.setText(String.valueOf(count));
             }
         });
 
@@ -106,10 +108,9 @@ public class DetailsActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    count-=1;
+                    count -= 1;
                     txtProductUnit.setText(String.valueOf(count));
                 }
-
             }
         });
 

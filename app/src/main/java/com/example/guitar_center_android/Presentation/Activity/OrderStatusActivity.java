@@ -11,7 +11,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.guitar_center_android.Domain.Services.APIServices.Manager.OrderManager;
+import com.example.guitar_center_android.Domain.Services.Implementation.UserServices;
+import com.example.guitar_center_android.Domain.Services.Interface.IUserServices;
 import com.example.guitar_center_android.Presentation.Adapter.Order_Adapter;
+import com.example.guitar_center_android.Presentation.Controller.Command.CommandProcessor;
 import com.example.guitar_center_android.R;
 
 public class OrderStatusActivity extends AppCompatActivity {
@@ -20,6 +23,8 @@ public class OrderStatusActivity extends AppCompatActivity {
     private Order_Adapter adapter;
     private Intent intent;
 
+    private IUserServices userServices;
+    private CommandProcessor commandProcessor;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,9 +34,15 @@ public class OrderStatusActivity extends AppCompatActivity {
         //Khởi tạo Ordermanager
         orderManager = new OrderManager(this);
 
+        // Khoi tao uservices and commandProcessor
+        userServices = new UserServices(this);
+        commandProcessor = new CommandProcessor();
+
         // khởi tọa recycleview và orderAdapter
         recyclerView = findViewById(R.id.order_list_view);
         adapter = new Order_Adapter(this, orderManager);
+        adapter.setICommandProcessor(commandProcessor);
+        adapter.setIUserServices(userServices);
 
         //set layout cho recycleview
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

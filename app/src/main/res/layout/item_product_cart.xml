@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="120dp">
 
@@ -129,7 +130,16 @@
                         app:layout_constraintEnd_toStartOf="@+id/btnAdd_cart"
                         app:layout_constraintStart_toEndOf="@+id/btnSub_cart"
                         app:layout_constraintTop_toTopOf="@+id/btnAdd_cart" />
-
+                    <TextView
+                        android:id="@+id/btnDelete_cart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="-30dp"
+                        android:text="Xoá sản phẩm"
+                        android:textColor="#DD5050"
+                        android:textStyle="bold|italic"
+                        tools:ignore="MissingConstraints" />
                     <TextView
                         android:id="@+id/btnSub_cart"
                         android:layout_width="28dp"
@@ -141,17 +151,10 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/btnAdd_cart" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
             </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/btnDelete_cart"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="-30dp"
-                    android:text="Xoá sản phẩm"
-                    android:textColor="#DD5050"
-                    android:textStyle="bold|italic" />
+
         </LinearLayout>
         </LinearLayout>
         </LinearLayout>

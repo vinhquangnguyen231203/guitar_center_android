@@ -33,62 +33,57 @@
                     android:id="@+id/txt_item_orderDetail_productName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:text="Tên sản phẩm"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Đơn giá:"
-                    android:layout_marginTop="10dp"
-                    android:textStyle="bold"
-                    android:layout_marginLeft="130dp"/>
-                <TextView
-                    android:id="@+id/txt_item_orderDetail_productPrice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="2.000.000,00"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_alignParentEnd="true"
-                    android:textStyle="italic"/>
-
             </RelativeLayout>
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <RelativeLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="70dp"
+                    android:layout_height="wrap_content"
                     android:orientation="horizontal">
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Số lượng"
+                        android:text="Đơn giá:"
                         android:layout_marginTop="10dp"
                         android:textStyle="bold"
-                        android:layout_marginLeft="130dp"/>
+                        android:layout_marginLeft="130dp"
+                        android:layout_marginStart="10dp"/>
+                    <TextView
+                        android:id="@+id/txt_item_orderDetail_productPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2.000.000,00"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="10dp"
+                        android:textStyle="italic"
+                        android:layout_marginStart="80dp"/>
+                </RelativeLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Số lượng:"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="10dp"/>
                     <TextView
                         android:id="@+id/txt_item_orderDetail_productUnit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="2"
-                        android:layout_marginRight="70dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_alignParentEnd="true"
+                        android:layout_marginLeft="10dp"
                         android:textStyle="italic"/>
-
-
-                </RelativeLayout>
-
-
-
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

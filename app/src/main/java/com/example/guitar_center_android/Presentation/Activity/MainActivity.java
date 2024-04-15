@@ -161,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
         c_rum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                categoryId = "R";
+                categoryId = "D";
                 adapter.loadProductByCategory(categoryId);
             }
         });

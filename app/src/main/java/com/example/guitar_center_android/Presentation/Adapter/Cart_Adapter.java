@@ -88,6 +88,19 @@ public class Cart_Adapter extends RecyclerView.Adapter<Cart_Adapter.CartViewHold
                     currentQuantity--;
                     holder.productUnit.setText(String.valueOf(currentQuantity));
                 }
+
+                //Xu ly gia tri ben sqlite
+                product.setUnit(currentQuantity);
+                boolean checkValue = commandProcessor.executeCart(new UpdateCart(cartServices,product));
+                if(checkValue)
+                {
+                    loadCart();
+                }
+                else
+                {
+                    Toast.makeText(context, "Ko thay đổi được giá trị giỏ hàng", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
@@ -100,6 +113,18 @@ public class Cart_Adapter extends RecyclerView.Adapter<Cart_Adapter.CartViewHold
                 // tăng số lượng thêm 1
                 currentQuantity++;
                 holder.productUnit.setText(String.valueOf(currentQuantity));
+
+                //Xu ly gia tri ben sqlite
+                product.setUnit(currentQuantity);
+                boolean checkValue = commandProcessor.executeCart(new UpdateCart(cartServices,product));
+                if(checkValue)
+                {
+                    loadCart();
+                }
+                else
+                {
+                    Toast.makeText(context, "Ko thay đổi được giá trị giỏ hàng", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

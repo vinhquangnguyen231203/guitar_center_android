@@ -77,23 +77,29 @@ public class Cart_Adapter extends RecyclerView.Adapter<Cart_Adapter.CartViewHold
 
 
         //------------ XỬ LÝ TĂNG GIẢM SẢN PHẨM
-        count = 0;
         holder.btnSub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (count <= 0)
-                {
-                    count = 0;
-                    holder.productUnit.setText(String.valueOf(count));
+                // Giảm số lượng sản phẩm khi nhấn nút trừ
+                //lấy số lượng hiện tại
+                int currentQuantity = Integer.parseInt(holder.productUnit.getText().toString());
+                if (currentQuantity > 0) {
+                    // số lượng lớn hơn 0 thì giảm đi
+                    currentQuantity--;
+                    holder.productUnit.setText(String.valueOf(currentQuantity));
                 }
             }
         });
+
         holder.btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                count += 1;
-                holder.productUnit.setText(String.valueOf(count));
+                // Tăng số lượng sản phẩm khi nhấn nút cộng
+                //lấy số lượng hiện tại
+                int currentQuantity = Integer.parseInt(holder.productUnit.getText().toString());
+                // tăng số lượng thêm 1
+                currentQuantity++;
+                holder.productUnit.setText(String.valueOf(currentQuantity));
             }
         });
 

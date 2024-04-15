@@ -22,7 +22,7 @@ public interface ProductAPIServices {
     Call<Product>  getProductById(@Path("id") String id);
 
     //Lấy hình ảnh sản phẩm
-    @GET("products/{:id}/image")
+    @GET("products/{id}/image")
     Call<String> getProductImage(@Path("id") String id);
 
     //người dùng xem danh sách sản phẩm trong category

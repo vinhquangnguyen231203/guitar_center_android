@@ -5,6 +5,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
+import android.util.Log;
 
 import com.example.guitar_center_android.Domain.model.Product;
 import com.example.guitar_center_android.Repository.DB_Helper.DB_Helper_Cart;
@@ -127,5 +129,41 @@ public class CartRepository implements ICartRepository {
         }
 
         return false;
+    }
+
+    @SuppressLint("Range")
+    @Override
+    public Product getProductById(String productId) {
+        Cursor cursor = null;
+        Product product = null;
+
+        try {
+            String selection = "id_product = ?";
+            String[] selectionArgs = {productId};
+
+            cursor = database.query("CART", null, selection, selectionArgs, null, null, null);
+
+            if (cursor != null && cursor.moveToFirst()) {
+                // Lấy thông tin của sản phẩm từ Cursor
+
+                product = new Product(
+                        cursor.getString(cursor.getColumnIndex("id_product")),
+                        cursor.getString(cursor.getColumnIndex("name_product")),
+                        cursor.getInt(cursor.getColumnIndex("unit")),
+                        cursor.getDouble(cursor.getColumnIndex("price")),
+                        cursor.getString(cursor.getColumnIndex("image")),
+                        cursor.getString(cursor.getColumnIndex("categoryId")),
+                        cursor.getString(cursor.getColumnIndex("description"))
+                );
+            }
+        } catch (SQLiteException e) {
+            Log.e("Sql_Error_getProductById", "Error while getting product by id: " + e.getMessage());
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+
+        return product;
     }
 }

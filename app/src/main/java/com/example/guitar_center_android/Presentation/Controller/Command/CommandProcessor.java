@@ -22,4 +22,8 @@ public class CommandProcessor {
     {
         return commandUser.getAllUser();
     }
+    public Product getProduct(CommandCart commandCart)
+    {
+        return commandCart.getProduct();
+    }
 }

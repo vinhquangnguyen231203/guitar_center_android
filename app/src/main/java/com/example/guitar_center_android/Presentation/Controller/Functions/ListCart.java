@@ -23,4 +23,9 @@ public class ListCart extends CommandCart {
     {
         return cartServices.getAllCart();
     }
+
+    @Override
+    public Product getProduct() {
+        return null;
+    }
 }

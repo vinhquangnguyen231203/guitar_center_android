@@ -53,4 +53,15 @@ public class CartServices implements ICartServices {
     public boolean deleteAllCart() {
         return cartRepository.deleteAllCart();
     }
+
+    @Override
+    public Product getProductById(String productId) {
+        if(productId != null)
+        {
+            return cartRepository.getProductById(productId);
+        }
+        return null;
+    }
+
+
 }

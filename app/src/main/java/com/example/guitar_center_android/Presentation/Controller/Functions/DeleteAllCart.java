@@ -21,4 +21,9 @@ public class DeleteAllCart extends CommandCart {
     public List<Product> getAllCart() {
         return null;
     }
+
+    @Override
+    public Product getProduct() {
+        return null;
+    }
 }

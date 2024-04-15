@@ -3,22 +3,20 @@ package com.example.guitar_center_android.Presentation.Controller.Functions;
 import com.example.guitar_center_android.Domain.Services.Interface.ICartServices;
 import com.example.guitar_center_android.Domain.model.Product;
 import com.example.guitar_center_android.Presentation.Controller.Command.CommandCart;
-import com.example.guitar_center_android.Repository.Interface.ICartRepository;
 
 import java.util.List;
 
-public class InsertCart extends CommandCart {
-    private Product product;
-
-    //Constructor
-    public InsertCart(ICartServices cartServices, Product product) {
+public class GetProductById extends CommandCart {
+    private String productId;
+    public GetProductById(ICartServices cartServices, String productId)
+    {
         super(cartServices);
-        this.product = product;
+        this.productId = productId;
     }
 
     @Override
     public boolean execute() {
-        return cartServices.insertCart(product);
+        return false;
     }
 
     @Override
@@ -28,8 +26,6 @@ public class InsertCart extends CommandCart {
 
     @Override
     public Product getProduct() {
-        return null;
+        return cartServices.getProductById(productId);
     }
-
-
 }

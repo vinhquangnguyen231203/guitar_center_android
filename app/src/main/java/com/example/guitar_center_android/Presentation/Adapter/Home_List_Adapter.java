@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.ButtonBarLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.guitar_center_android.Domain.Services.APIServices.Manager.ProductManager;
@@ -26,6 +27,7 @@ import com.example.guitar_center_android.Presentation.Activity.MainActivity;
 import com.example.guitar_center_android.Presentation.Controller.Command.CommandProcessor;
 import com.example.guitar_center_android.Presentation.Controller.Functions.ListUser;
 import com.example.guitar_center_android.R;
+import com.google.android.material.button.MaterialButton;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -83,6 +85,13 @@ public class Home_List_Adapter extends RecyclerView.Adapter<Home_List_Adapter.Pr
                 dicrect_to_details(product);
             }
         });
+
+        holder.btnAddCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dicrect_to_details(product);
+            }
+        });
     }
 
 
@@ -96,6 +105,7 @@ public class Home_List_Adapter extends RecyclerView.Adapter<Home_List_Adapter.Pr
     public  static  class ProductViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
         TextView  textViewName, textViewPrice;
+        MaterialButton btnAddCart;
 
         public ProductViewHolder(View itemView){
             super(itemView);
@@ -103,6 +113,8 @@ public class Home_List_Adapter extends RecyclerView.Adapter<Home_List_Adapter.Pr
 
             textViewName = itemView.findViewById(R.id.txtProductName_home_list);
             textViewPrice = itemView.findViewById(R.id.txtProductPrice_home_list);
+
+            btnAddCart = itemView.findViewById(R.id.btnAddCart_home_list);
 
         }
     }

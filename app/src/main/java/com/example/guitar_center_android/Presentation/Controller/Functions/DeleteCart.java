@@ -27,4 +27,9 @@ public class DeleteCart extends CommandCart {
     {
         return  null;
     }
+
+    @Override
+    public Product getProduct() {
+        return null;
+    }
 }

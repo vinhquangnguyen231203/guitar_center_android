@@ -25,4 +25,9 @@ public class UpdateCart extends CommandCart {
     {
         return null;
     }
+
+    @Override
+    public Product getProduct() {
+        return null;
+    }
 }

@@ -16,5 +16,6 @@ public abstract class CommandCart {
     //Methods
     public abstract boolean execute();
     public abstract List<Product> getAllCart();
+    public abstract Product getProduct();
 
 }

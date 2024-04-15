@@ -8,7 +8,9 @@ import com.example.guitar_center_android.Domain.Services.APIServices.Manager.Pro
 import com.example.guitar_center_android.Domain.Services.Interface.ICartServices;
 import com.example.guitar_center_android.Domain.model.Product;
 import com.example.guitar_center_android.Presentation.Controller.Command.CommandProcessor;
+import com.example.guitar_center_android.Presentation.Controller.Functions.GetProductById;
 import com.example.guitar_center_android.Presentation.Controller.Functions.InsertCart;
+import com.example.guitar_center_android.Presentation.Controller.Functions.UpdateCart;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -59,22 +61,43 @@ public class ProductDetails_Adapter {
                 @Override
                 public void onResponse(Call<Product> call, Response<Product> response) {
                     Product product = response.body();
-                    product.setUnit(unit);
+
 
                     Log.d("ShowProduct",product.toString());
 
                     // Thêm sản phẩm vào table Cart trong sqlite
+                    // Kiểm tra nếu id sản phẩm tồn tại trong sqlite thì gọi hàm update()
+                    // Ngược lại gọi hàm insert
+                    Product productToCheck = commandProcessor.getProduct(new GetProductById(cartServices,productID));
 
-                    boolean checkResult = commandProcessor.executeCart(
-                            new InsertCart(cartServices,product)
-                    );
-                    if(checkResult){
-                        Toast.makeText(context, "Đã thêm sản phẩm vào giỏ hàng", Toast.LENGTH_SHORT).show();
+                    if(productToCheck == null)
+                    {
+                        boolean checkResult = commandProcessor.executeCart(
+                                new InsertCart(cartServices,product)
+                        );
+                        if(checkResult){
+                            Toast.makeText(context, "Đã thêm sản phẩm vào giỏ hàng", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            Toast.makeText(context, "Thêm sản phẩm thất bại", Toast.LENGTH_SHORT).show();
+                        }
                     }
                     else
                     {
-                        Toast.makeText(context, "Thêm sản phẩm thất bại", Toast.LENGTH_SHORT).show();
+                        product.setUnit(product.getUnit() + productToCheck.getUnit());
+                        boolean checkResult = commandProcessor.executeCart(
+                            new UpdateCart(cartServices,product)
+                        );
+                        if(checkResult){
+                            Toast.makeText(context, "Cập nhật số lượng sản phẩm", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            Toast.makeText(context, "Cập nhật số lượng sản phẩm thất bại", Toast.LENGTH_SHORT).show();
+                        }
                     }
+
                 }
 
                 @Override

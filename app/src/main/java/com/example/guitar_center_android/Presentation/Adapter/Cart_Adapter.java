@@ -1,6 +1,7 @@
 package com.example.guitar_center_android.Presentation.Adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,19 +55,25 @@ public class Cart_Adapter extends RecyclerView.Adapter<Cart_Adapter.CartViewHold
     public void onBindViewHolder(@NonNull Cart_Adapter.CartViewHolder holder, int position) {
         Product product = productList.get(position);
 
+        // Check product List
+        Log.d("holder_product_json",product.toString());
+
         //set data vào views
         holder.productName.setText(product.getProductName());
         holder.productPrice.setText(String.valueOf(product.getPrice()));
         holder.productUnit.setText(String.valueOf(product.getUnit()));
-        holder.productTotalPrice.setText(this.totalPrice(product.getPrice(),product.getUnit()));
+        //holder.productTotalPrice.setText(this.totalPrice(product.getPrice(),product.getUnit()));
 
         //xử lý picasso
         String imagePath = "http://10.0.2.2:3333/api/products/"+product.getProductId()+"/image";
-        Picasso.get()
-                .load(imagePath)
-//                .placeholder(R.drawable.placeholder_image) // Placeholder image khi đang tải
-//                .error(R.drawable.error_image) // Ảnh lỗi nếu không tải được
-                .into(holder.imgProduct);
+        if(imagePath != null)
+        {
+            Picasso.get()
+                    .load(imagePath)
+//                    .placeholder(R.drawable.plus) // Placeholder image khi đang tải
+//                    .error(R.drawable.plus) // Ảnh lỗi nếu không tải được
+                    .into(holder.imgProduct);
+        }
 
 
         //------------ XỬ LÝ TĂNG GIẢM SẢN PHẨM
@@ -82,7 +89,7 @@ public class Cart_Adapter extends RecyclerView.Adapter<Cart_Adapter.CartViewHold
                 }
             }
         });
-        holder.btnSub.setOnClickListener(new View.OnClickListener() {
+        holder.btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 count += 1;
@@ -131,13 +138,14 @@ public class Cart_Adapter extends RecyclerView.Adapter<Cart_Adapter.CartViewHold
             btnSub = itemView.findViewById(R.id.btnSub_cart);
             productUnit = itemView.findViewById(R.id.unit_cart);
             btnDelete = itemView.findViewById(R.id.btnDelete_cart);
+            imgProduct = itemView.findViewById(R.id.imgProduct_cart);
         }
     }
 
     //-------------- LAY DU LIEU ICART SERVICES VÀ COMMANDPROCESSOR
     public void setICartServices(ICartServices services)
     {
-        this.cartServices = cartServices;
+        this.cartServices = services;
     }
     public void setCommandProcessor(CommandProcessor commandProcessor)
     {
@@ -147,11 +155,15 @@ public class Cart_Adapter extends RecyclerView.Adapter<Cart_Adapter.CartViewHold
     //----------- HÀM LOADCART TRONG SQLITE
     public void loadCart()
     {
-        productList = new ArrayList<>();
 
         // --- Lỗi Null Expression
-        //productList = commandProcessor.getAllCart(new ListCart(cartServices));
+        productList = commandProcessor.getAllCart(new ListCart(cartServices));
 
+        //Tạo 1 log
+        for(Product product: productList)
+        {
+            Log.d("check_list_cart_json",product.toString());
+        }
 
         notifyDataSetChanged();
     }

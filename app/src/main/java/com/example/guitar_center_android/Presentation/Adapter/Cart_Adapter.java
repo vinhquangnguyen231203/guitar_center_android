@@ -62,7 +62,7 @@ public class Cart_Adapter extends RecyclerView.Adapter<Cart_Adapter.CartViewHold
         holder.productName.setText(product.getProductName());
         holder.productPrice.setText(String.valueOf(product.getPrice()));
         holder.productUnit.setText(String.valueOf(product.getUnit()));
-        //holder.productTotalPrice.setText(this.totalPrice(product.getPrice(),product.getUnit()));
+        holder.productTotalPrice.setText(this.totalPrice(product.getPrice(),product.getUnit()));
 
         //xử lý picasso
         String imagePath = "http://10.0.2.2:3333/api/products/"+product.getProductId()+"/image";
@@ -82,7 +82,7 @@ public class Cart_Adapter extends RecyclerView.Adapter<Cart_Adapter.CartViewHold
             @Override
             public void onClick(View v) {
 
-                if (count >= 0)
+                if (count <= 0)
                 {
                     count = 0;
                     holder.productUnit.setText(String.valueOf(count));

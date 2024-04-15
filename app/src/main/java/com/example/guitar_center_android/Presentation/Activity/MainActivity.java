@@ -115,7 +115,15 @@ public class MainActivity extends AppCompatActivity {
         btnOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                direct(OrderStatusActivity.class);
+                boolean checkResult = adapter.checkExistUser();
+                if(checkResult)
+                {
+                    direct(OrderStatusActivity.class);
+                }
+                else
+                {
+                    direct(LoginActivity.class);
+                }
             }
         });
 

@@ -5,13 +5,11 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.guitar_center_android.Domain.Services.APIServices.Interface.OrderAPIServices;
-import com.example.guitar_center_android.Domain.Services.APIServices.Interface.ProductAPIServices;
 import com.example.guitar_center_android.Domain.Services.APIServices.RetrofitClient;
 
+import com.example.guitar_center_android.Domain.model.OrderBody;
 import com.example.guitar_center_android.Domain.model.Order;
 import com.example.guitar_center_android.Domain.model.OrderDetail;
-import com.example.guitar_center_android.Domain.model.OrderRequest;
-import com.example.guitar_center_android.Domain.model.Product;
 
 import java.util.List;
 
@@ -29,11 +27,11 @@ public class OrderManager {
     }
 
     //Đặt hàng
-    public  void addOrder(String userName, OrderRequest orderRequest, Callback<OrderRequest> callback){
-        Call<OrderRequest> call = orderAPIServices.addOrder(userName,orderRequest);
-        call.enqueue(new Callback<OrderRequest>() {
+    public  void addOrder(String userName, OrderBody orderBody, Callback<OrderBody> callback){
+        Call<OrderBody> call = orderAPIServices.addOrder(userName, orderBody);
+        call.enqueue(new Callback<OrderBody>() {
             @Override
-            public void onResponse(Call<OrderRequest> call, Response<OrderRequest> response) {
+            public void onResponse(Call<OrderBody> call, Response<OrderBody> response) {
                 if (response.isSuccessful() && response.body() != null) {
 
                     Log.d("addOrder_Json",response.body().toString());
@@ -44,7 +42,7 @@ public class OrderManager {
             }
 
             @Override
-            public void onFailure(Call<OrderRequest> call, Throwable t) {
+            public void onFailure(Call<OrderBody> call, Throwable t) {
                 callback.onFailure(call,t);
             }
         });

@@ -12,8 +12,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.guitar_center_android.Domain.Services.APIServices.Manager.UserManager;
 import com.example.guitar_center_android.Domain.Services.Implementation.CartServices;
+import com.example.guitar_center_android.Domain.Services.Implementation.UserServices;
 import com.example.guitar_center_android.Domain.Services.Interface.ICartServices;
+import com.example.guitar_center_android.Domain.Services.Interface.IUserServices;
 import com.example.guitar_center_android.Presentation.Adapter.Cart_Adapter;
 import com.example.guitar_center_android.Presentation.Controller.Command.CommandProcessor;
 import com.example.guitar_center_android.R;
@@ -24,12 +27,14 @@ public class CartActivity extends AppCompatActivity {
     private Cart_Adapter adapter;
 
     private ICartServices cartServices;
-    private CommandProcessor commandProcessor;
 
     private RecyclerView recyclerView;
     private TextView txtName, btnBack;
     private EditText txtPhone, txtAdress;
     private MaterialButton btnPayment;
+    private IUserServices userServices;
+    private CommandProcessor commandProcessor;
+    private UserManager userManager;
 
 
     @Override
@@ -42,11 +47,15 @@ public class CartActivity extends AppCompatActivity {
         //Khởi tạo instance field cho sqlite
         cartServices = new CartServices(this);
         commandProcessor = new CommandProcessor();
+        userServices = new UserServices(this);
+        userManager = new UserManager(this);
 
         //Khởi tạo adapter
         adapter = new Cart_Adapter(this);
         adapter.setICartServices(cartServices);
         adapter.setCommandProcessor(commandProcessor);
+        adapter.setUserServices(userServices);
+        adapter.setUserManager(userManager);
 
         //-------------- Thêm adapater vào recycle view
         //Lấy id

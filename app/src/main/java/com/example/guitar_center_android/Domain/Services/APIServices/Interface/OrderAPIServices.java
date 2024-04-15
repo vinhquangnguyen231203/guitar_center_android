@@ -1,6 +1,7 @@
 package com.example.guitar_center_android.Domain.Services.APIServices.Interface;
 
 import com.example.guitar_center_android.Domain.model.Order;
+import com.example.guitar_center_android.Domain.model.OrderBody;
 import com.example.guitar_center_android.Domain.model.OrderDetail;
 import com.example.guitar_center_android.Domain.model.OrderRequest;
 
@@ -20,7 +21,7 @@ public interface OrderAPIServices {
     //    @POST("orders/add")
     //    Call<OrderRequest> addOrder(@Body OrderRequest order);
     @POST("orders/{username}/add")
-    Call<OrderRequest> addOrder(@Path("username") String username, @Body OrderRequest order);
+    Call<OrderBody> addOrder(@Path("username") String username, @Body OrderBody orderBody);
 
     //người dùng xem danh sách đơn hàng của mình
     //    @GET("orders/my-orders")

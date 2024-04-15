@@ -12,17 +12,28 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.guitar_center_android.Domain.Services.APIServices.Manager.UserManager;
 import com.example.guitar_center_android.Domain.Services.Interface.ICartServices;
+import com.example.guitar_center_android.Domain.Services.Interface.IUserServices;
 import com.example.guitar_center_android.Domain.model.Product;
+import com.example.guitar_center_android.Domain.model.User;
+import com.example.guitar_center_android.Domain.model.UserSQL;
+import com.example.guitar_center_android.Presentation.Activity.CartActivity;
 import com.example.guitar_center_android.Presentation.Controller.Command.CommandProcessor;
 import com.example.guitar_center_android.Presentation.Controller.Functions.DeleteCart;
 import com.example.guitar_center_android.Presentation.Controller.Functions.ListCart;
+import com.example.guitar_center_android.Presentation.Controller.Functions.ListUser;
 import com.example.guitar_center_android.Presentation.Controller.Functions.UpdateCart;
 import com.example.guitar_center_android.R;
+import com.google.android.material.button.MaterialButton;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Cart_Adapter extends RecyclerView.Adapter<Cart_Adapter.CartViewHolder> {
     //Instance Fields
@@ -32,14 +43,17 @@ public class Cart_Adapter extends RecyclerView.Adapter<Cart_Adapter.CartViewHold
     //Instance Fields cho xu ly sqlite
     private ICartServices cartServices;
     private CommandProcessor commandProcessor;
-    private  int count;
+    private int count;
+    private TextView txtName, txtPhoneNumber, txtAddress;
 
     private List<Integer> itemCountList;
 
+    private IUserServices userServices;
+    private String userName;
+    private UserManager userManager;
 
     //Constructor
-    public Cart_Adapter(Context context)
-    {
+    public Cart_Adapter(Context context) {
         this.context = context;
         this.itemCountList = new ArrayList<>();
     }
@@ -56,18 +70,17 @@ public class Cart_Adapter extends RecyclerView.Adapter<Cart_Adapter.CartViewHold
         Product product = productList.get(position);
 
         // Check product List
-        Log.d("holder_product_json",product.toString());
+        Log.d("holder_product_json", product.toString());
 
         //set data vào views
         holder.productName.setText(product.getProductName());
         holder.productPrice.setText(String.valueOf(product.getPrice()));
         holder.productUnit.setText(String.valueOf(product.getUnit()));
-        holder.productTotalPrice.setText(this.totalPrice(product.getPrice(),product.getUnit()));
+        holder.productTotalPrice.setText(this.totalPrice(product.getPrice(), product.getUnit()));
 
         //xử lý picasso
-        String imagePath = "http://10.0.2.2:3333/api/products/"+product.getProductId()+"/image";
-        if(imagePath != null)
-        {
+        String imagePath = "http://10.0.2.2:3333/api/products/" + product.getProductId() + "/image";
+        if (imagePath != null) {
             Picasso.get()
                     .load(imagePath)
 //                    .placeholder(R.drawable.plus) // Placeholder image khi đang tải
@@ -91,13 +104,10 @@ public class Cart_Adapter extends RecyclerView.Adapter<Cart_Adapter.CartViewHold
 
                 //Xu ly gia tri ben sqlite
                 product.setUnit(currentQuantity);
-                boolean checkValue = commandProcessor.executeCart(new UpdateCart(cartServices,product));
-                if(checkValue)
-                {
+                boolean checkValue = commandProcessor.executeCart(new UpdateCart(cartServices, product));
+                if (checkValue) {
                     loadCart();
-                }
-                else
-                {
+                } else {
                     Toast.makeText(context, "Ko thay đổi được giá trị giỏ hàng", Toast.LENGTH_SHORT).show();
                 }
 
@@ -116,13 +126,10 @@ public class Cart_Adapter extends RecyclerView.Adapter<Cart_Adapter.CartViewHold
 
                 //Xu ly gia tri ben sqlite
                 product.setUnit(currentQuantity);
-                boolean checkValue = commandProcessor.executeCart(new UpdateCart(cartServices,product));
-                if(checkValue)
-                {
+                boolean checkValue = commandProcessor.executeCart(new UpdateCart(cartServices, product));
+                if (checkValue) {
                     loadCart();
-                }
-                else
-                {
+                } else {
                     Toast.makeText(context, "Ko thay đổi được giá trị giỏ hàng", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -133,12 +140,9 @@ public class Cart_Adapter extends RecyclerView.Adapter<Cart_Adapter.CartViewHold
             @Override
             public void onClick(View v) {
                 boolean checkResult = deleteCart_inSqlite(product.getProductId());
-                if(checkResult)
-                {
+                if (checkResult) {
                     Toast.makeText(context, "Đã xóa sản phẩm khỏi giỏ hàng", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
+                } else {
                     Toast.makeText(context, "Xóa sản phẩm thất bại", Toast.LENGTH_SHORT).show();
                 }
                 Cart_Adapter.this.loadCart();
@@ -154,9 +158,8 @@ public class Cart_Adapter extends RecyclerView.Adapter<Cart_Adapter.CartViewHold
         return productList == null ? 0 : productList.size();
     }
 
-    public static  class CartViewHolder extends RecyclerView.ViewHolder
-    {
-        TextView productName, productPrice, productTotalPrice, btnAdd, btnSub, productUnit,btnDelete;
+    public static class CartViewHolder extends RecyclerView.ViewHolder {
+        TextView productName, productPrice, productTotalPrice, btnAdd, btnSub, productUnit, btnDelete;
         ImageView imgProduct;
 
 
@@ -174,54 +177,110 @@ public class Cart_Adapter extends RecyclerView.Adapter<Cart_Adapter.CartViewHold
     }
 
     //-------------- LAY DU LIEU ICART SERVICES VÀ COMMANDPROCESSOR
-    public void setICartServices(ICartServices services)
-    {
+    public void setICartServices(ICartServices services) {
         this.cartServices = services;
     }
-    public void setCommandProcessor(CommandProcessor commandProcessor)
-    {
+
+    public void setCommandProcessor(CommandProcessor commandProcessor) {
         this.commandProcessor = commandProcessor;
     }
 
     //----------- HÀM LOADCART TRONG SQLITE
-    public void loadCart()
-    {
+    public void loadCart() {
 
         // --- Lỗi Null Expression
         productList = commandProcessor.getAllCart(new ListCart(cartServices));
 
         //Tạo 1 log
-        for(Product product: productList)
-        {
-            Log.d("check_list_cart_json",product.toString());
+        for (Product product : productList) {
+            Log.d("check_list_cart_json", product.toString());
         }
 
+        //Lấy thông tin ngưoi dung hien thi trong thong tin thanh toan
+
+        //Lay cac id
+        txtName = ((CartActivity) context).findViewById(R.id.txtName_cart);
+        txtPhoneNumber = ((CartActivity) context).findViewById(R.id.txtPhone_number_cart);
+        txtAddress = ((CartActivity) context).findViewById(R.id.address_cart);
+        MaterialButton btnPayment = ((CartActivity) context).findViewById(R.id.payment_cart_home);
+
+        if(checkExitUser())
+        {
+            userManager.getUserInfor(userName, new Callback<User>() {
+                @Override
+                public void onResponse(Call<User> call, Response<User> response) {
+                    User user = response.body();
+                    txtName.setText(user.getFullname());
+                    txtPhoneNumber.setText(user.getPhone().toString());
+                    txtAddress.setText(user.getAddress());
+                }
+
+                @Override
+                public void onFailure(Call<User> call, Throwable t) {
+                    Toast.makeText(context, "Không lấy dc thông tin user", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
         notifyDataSetChanged();
+
     }
 
     //----- HÀM TÍNH TOTAL PRICE
-    private String totalPrice(Double price, int unit)
-    {
+    private String totalPrice(Double price, int unit) {
         return String.valueOf(price * unit);
     }
 
 
     //------ XỬ LÝ UPDATE SỐ LƯỢNG TRONG SQLITE
-    private boolean deleteCart_inSqlite(String productId)
-    {
+    private boolean deleteCart_inSqlite(String productId) {
         boolean checkResult = commandProcessor.executeCart(
-                new DeleteCart(cartServices,productId)
+                new DeleteCart(cartServices, productId)
         );
-        return  checkResult;
+        return checkResult;
     }
 
     //-------XỬ LÝ XÓA SẢN PHẨM TRONG SQLITE
-    private boolean updateCart_inSqlite(Product product, int count)
-    {
+    private boolean updateCart_inSqlite(Product product, int count) {
         product.setUnit(count);
         boolean checkResult = commandProcessor.executeCart(
-                new UpdateCart(cartServices,product)
+                new UpdateCart(cartServices, product)
         );
-        return  checkResult;
+        return checkResult;
+    }
+
+    //---- Lấy các thông tin userServices và commandProcessor
+    public void setUserServices(IUserServices userServices) {
+        this.userServices = userServices;
+    }
+
+    public void setCommandProccessor(CommandProcessor commandProcessor) {
+        this.commandProcessor = commandProcessor;
+    }
+
+    //-- Hàm kiểm tra sqlite có user hay k
+    public boolean checkExitUser() {
+        List<UserSQL> userSQLList = commandProcessor.getAllUser(new ListUser(userServices));
+
+        if(userSQLList.size() != 0)
+        {
+            for (UserSQL userSQL: userSQLList){
+                userName = userSQL.getUserName();
+            }
+            return true;
+        }
+        return false;
+    }
+
+    //----- LAY THONG TIN USERMANGER TU CART ACTIVITY
+    public void setUserManager(UserManager userManager)
+    {
+        this.userManager = userManager;
+    }
+
+
+    //--HANH DONG THANH TOAN
+    public void payment()
+    {
+
     }
 }

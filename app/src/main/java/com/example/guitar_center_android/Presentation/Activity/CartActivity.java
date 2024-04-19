@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.guitar_center_android.Domain.Services.APIServices.Manager.OrderManager;
 import com.example.guitar_center_android.Domain.Services.APIServices.Manager.UserManager;
 import com.example.guitar_center_android.Domain.Services.Implementation.CartServices;
 import com.example.guitar_center_android.Domain.Services.Implementation.UserServices;
@@ -35,6 +36,7 @@ public class CartActivity extends AppCompatActivity {
     private IUserServices userServices;
     private CommandProcessor commandProcessor;
     private UserManager userManager;
+    private OrderManager orderManager;
 
 
     @Override
@@ -49,6 +51,7 @@ public class CartActivity extends AppCompatActivity {
         commandProcessor = new CommandProcessor();
         userServices = new UserServices(this);
         userManager = new UserManager(this);
+        orderManager = new OrderManager(this);
 
         //Khởi tạo adapter
         adapter = new Cart_Adapter(this);
@@ -56,6 +59,7 @@ public class CartActivity extends AppCompatActivity {
         adapter.setCommandProcessor(commandProcessor);
         adapter.setUserServices(userServices);
         adapter.setUserManager(userManager);
+        adapter.setOrderManager(orderManager);
 
         //-------------- Thêm adapater vào recycle view
         //Lấy id
@@ -77,6 +81,14 @@ public class CartActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(CartActivity.this,MainActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        //--------- Xu ly thanh toan
+        btnPayment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adapter.payment();
             }
         });
 

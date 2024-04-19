@@ -1,6 +1,9 @@
 package com.example.guitar_center_android.Presentation.Adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,13 +16,17 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.guitar_center_android.Domain.Services.APIServices.Manager.OrderManager;
 import com.example.guitar_center_android.Domain.Services.APIServices.Manager.UserManager;
 import com.example.guitar_center_android.Domain.Services.Interface.ICartServices;
 import com.example.guitar_center_android.Domain.Services.Interface.IUserServices;
+import com.example.guitar_center_android.Domain.model.OrderBody;
 import com.example.guitar_center_android.Domain.model.Product;
 import com.example.guitar_center_android.Domain.model.User;
 import com.example.guitar_center_android.Domain.model.UserSQL;
 import com.example.guitar_center_android.Presentation.Activity.CartActivity;
+import com.example.guitar_center_android.Presentation.Activity.LoginActivity;
+import com.example.guitar_center_android.Presentation.Activity.MainActivity;
 import com.example.guitar_center_android.Presentation.Controller.Command.CommandProcessor;
 import com.example.guitar_center_android.Presentation.Controller.Functions.DeleteCart;
 import com.example.guitar_center_android.Presentation.Controller.Functions.ListCart;
@@ -45,7 +52,7 @@ public class Cart_Adapter extends RecyclerView.Adapter<Cart_Adapter.CartViewHold
     private ICartServices cartServices;
     private CommandProcessor commandProcessor;
     private int count;
-    private TextView txtName, txtPhoneNumber, txtAddress;
+    private TextView txtName, txtPhoneNumber, txtAddress, txtTotalPricePayment;
 
 
     private List<Integer> itemCountList;
@@ -53,6 +60,7 @@ public class Cart_Adapter extends RecyclerView.Adapter<Cart_Adapter.CartViewHold
     private IUserServices userServices;
     private String userName;
     private UserManager userManager;
+    private OrderManager orderManager;
 
     //Constructor
     public Cart_Adapter(Context context) {
@@ -106,6 +114,7 @@ public class Cart_Adapter extends RecyclerView.Adapter<Cart_Adapter.CartViewHold
 
                 //Xu ly gia tri ben sqlite
                 product.setUnit(currentQuantity);
+                notifyDataChanged_updateTotal();
                 boolean checkValue = commandProcessor.executeCart(new UpdateCart(cartServices, product));
                 if (checkValue) {
                     loadCart();
@@ -223,7 +232,7 @@ public class Cart_Adapter extends RecyclerView.Adapter<Cart_Adapter.CartViewHold
                 }
             });
         }
-        notifyDataSetChanged();
+        notifyDataChanged_updateTotal();
 
     }
 
@@ -250,13 +259,17 @@ public class Cart_Adapter extends RecyclerView.Adapter<Cart_Adapter.CartViewHold
         return checkResult;
     }
 
-    //---- Lấy các thông tin userServices và commandProcessor
+    //---- Lấy các thông tin userServices và commandProcessor, orderManager
     public void setUserServices(IUserServices userServices) {
         this.userServices = userServices;
     }
 
     public void setCommandProccessor(CommandProcessor commandProcessor) {
         this.commandProcessor = commandProcessor;
+    }
+    public void setOrderManager(OrderManager orderManager)
+    {
+        this.orderManager = orderManager;
     }
 
     //-- Hàm kiểm tra sqlite có user hay k
@@ -283,13 +296,165 @@ public class Cart_Adapter extends RecyclerView.Adapter<Cart_Adapter.CartViewHold
     //--HANH DONG THANH TOAN
     public void payment()
     {
-
+        if(checkExitUser())
+        {
+            show_Payment();
+        }
+        else
+        {
+            this.showLogin_not_user();
+        }
     }
 
     //Kiểm tra thong tin
-    private boolean checkInfoisValid()
-    {
+    private boolean checkInfoisValid() {
+        List<UserSQL> userSQLList = userServices.getAllUser();
 
+        if (userSQLList != null && !userSQLList.isEmpty()) {
+            return true;
+        }
         return false;
+    }
+
+    //-----HOP THOAI XU LY KHI CHUA DANG NHAP
+    private void showLogin_not_user()
+    {
+        //Hiện hộp thoại hỏi
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+        //Tiêu đề và nội dung cho hộp thoại
+        builder.setTitle("Login để thanh toán");
+        builder.setMessage("Bạn có muốn đăng nhập để thanh toán không");
+
+        //Nút đồng ý cho hộp thoại
+        // Khi đồng ý sẽ chuyển hướng
+        //Khi ko sẽ ở lại page cart
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //Xử lý thanh toán
+                Intent intent = new Intent(context, LoginActivity.class);
+                context.startActivity(intent);
+            }
+        });
+
+        //Khi ấn ko thì sẽ ở lại page
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //do nothing =)))))))
+            }
+        });
+
+        builder.show();
+
+    }
+    private void show_Payment()
+    {
+        //Hiện hộp thoại hỏi
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+        //Đặt tiêu đề và nội dung cho hộp thoại
+        builder.setTitle("Thanh toán");
+        builder.setMessage("Bạn có muốn thanh toán không ?");
+
+        //Khi ấn đồng ý
+        builder.setPositiveButton("Thanh toán", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(productList.size() == 0)
+                {
+                    Toast.makeText(context, "Không có sản phẩm để thanh toán", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    do_payment();
+                }
+            }
+        });
+
+        //Khi ấn không
+        builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // do nothing
+            }
+        });
+
+        builder.show();
+    }
+
+    //--- XU LY CAP NHAT SO LUONG
+    private void updateTotalPrice()
+    {
+        txtTotalPricePayment = (((CartActivity)context).findViewById(R.id.txt_totalPricePayment_Cart));
+        double totalPrice = 0;
+        for (Product product : productList) {
+            totalPrice += product.getPrice() * product.getUnit();
+        }
+
+        txtTotalPricePayment.setText(String.valueOf(totalPrice));
+    }
+
+    private void notifyDataChanged_updateTotal()
+    {
+        notifyDataSetChanged();
+        updateTotalPrice();
+    }
+
+    private void do_payment()
+    {
+        //Lấy thông tin address và phoneNumber
+        EditText txtPhoneNumber = ((CartActivity)context).findViewById(R.id.txtPhone_number_cart);
+        EditText txtAdress = ((CartActivity)context).findViewById(R.id.address_cart);
+
+        //Lưu thông tin vào OrderBody.Order
+        OrderBody.Order order = new OrderBody.Order(txtAddress.toString(),txtPhoneNumber.toString());
+        List<OrderBody.OrderDetail> listOrderDetails = getListOrderDetails();
+
+        OrderBody orderBody = new OrderBody(order,listOrderDetails);
+
+        //Gọi orderManager để thêm order
+        orderManager.addOrder(userName, orderBody, new Callback<OrderBody>() {
+            @Override
+            public void onResponse(Call<OrderBody> call, Response<OrderBody> response) {
+                boolean checkResult = cartServices.deleteAllCart();
+
+                if(checkResult)
+                {
+                    Toast.makeText(context, "Thanh toán thành công", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(context,MainActivity.class);
+                    context.startActivity(intent);
+                    loadCart();
+                }
+                else
+                {
+                    Toast.makeText(context, "Thanh toán thất bại", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OrderBody> call, Throwable t) {
+                Toast.makeText(context, "Thanh toán thất bại", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+    }
+    private List<OrderBody.OrderDetail> getListOrderDetails()
+    {
+        List<OrderBody.OrderDetail> listOrderDetails = new ArrayList<>();
+        OrderBody.OrderDetail orderDetail = new OrderBody.OrderDetail();
+        for(Product product: productList)
+        {
+            orderDetail.setProductId(product.getProductId());
+            orderDetail.setPrice(product.getPrice());
+            orderDetail.setUnit(product.getUnit());
+
+            //Them orderDetail vào list
+            listOrderDetails.add(orderDetail);
+        }
+        return listOrderDetails;
     }
 }

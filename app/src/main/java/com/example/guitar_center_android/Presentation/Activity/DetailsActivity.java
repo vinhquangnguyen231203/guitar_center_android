@@ -102,7 +102,7 @@ public class DetailsActivity extends AppCompatActivity {
         btnSub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(count == 0)
+                if(count <= 0)
                 {
                     txtProductUnit.setText("0");
                 }

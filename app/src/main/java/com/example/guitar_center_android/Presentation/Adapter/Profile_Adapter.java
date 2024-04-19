@@ -205,7 +205,7 @@ public class Profile_Adapter {
         if (checkResult)
         {
             boolean checkCart = commandProcessor.executeCart(new DeleteAllCart(cartServices));
-            if(checkCart)
+            if(checkResult)
             {
                 //Chuyển hướng sang trang home
                 Intent intent = new Intent(context, MainActivity.class);
@@ -213,10 +213,10 @@ public class Profile_Adapter {
 
                 Toast.makeText(context,"Bạn đã đăng xuất thành công", Toast.LENGTH_SHORT).show();
             }
-            else
-            {
+            else{
                 Toast.makeText(context, "Xảy ra lỗi hệ thống", Toast.LENGTH_SHORT).show();
             }
+
 
         }
         else{

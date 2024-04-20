@@ -82,7 +82,9 @@
             android:layout_width="match_parent"
             android:layout_height="280dp"
             android:paddingStart="16dp"
-            android:paddingEnd="16dp" />
+            android:paddingEnd="16dp"
+            android:overScrollMode="never"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -92,7 +94,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="442dp"
                 android:background="#FBB3CB"
                 android:orientation="vertical"
                 android:padding="30dp">

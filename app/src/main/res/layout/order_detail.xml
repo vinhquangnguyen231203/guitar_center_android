@@ -77,14 +77,19 @@
             </LinearLayout>
         </RelativeLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/orderDetail_listView"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="280dp"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:overScrollMode="never"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            android:layout_height="match_parent" >
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/orderDetail_listView"
+                android:layout_width="match_parent"
+                android:layout_height="181dp"
+                android:overScrollMode="never"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -94,7 +99,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="442dp"
+                android:layout_height="428dp"
                 android:background="#FBB3CB"
                 android:orientation="vertical"
                 android:padding="30dp">
@@ -122,7 +127,7 @@
                     <TextView
                         android:id="@+id/txt_orderDetail_fullname"
 
-                        android:layout_width="304dp"
+                        android:layout_width="206dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20sp"
                         android:text="Vinh quảng"
@@ -144,7 +149,7 @@
                     <TextView
                         android:id="@+id/txt_orderDetail_phone"
 
-                        android:layout_width="304dp"
+                        android:layout_width="205dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20sp"
                         android:text="0123456789"
@@ -165,7 +170,7 @@
                     <TextView
                         android:id="@+id/txt_orderDetail_status"
 
-                        android:layout_width="304dp"
+                        android:layout_width="164dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20sp"
                         android:text="Đang xử lý"
@@ -196,7 +201,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="80dp"
                     android:layout_marginTop="16dp"
                     android:textAlignment="center">
 
@@ -213,7 +217,7 @@
 
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="10,000.00đ"
+                        android:text="0 đ"
                         android:textSize="20sp" />
                 </LinearLayout>
 

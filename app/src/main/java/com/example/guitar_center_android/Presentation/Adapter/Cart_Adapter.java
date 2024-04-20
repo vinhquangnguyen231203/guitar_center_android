@@ -393,7 +393,7 @@ public class Cart_Adapter extends RecyclerView.Adapter<Cart_Adapter.CartViewHold
             totalPrice += product.getPrice() * product.getUnit();
         }
 
-        txtTotalPricePayment.setText(String.valueOf(totalPrice));
+        txtTotalPricePayment.setText(String.valueOf(totalPrice) + " $");
     }
 
     private void notifyDataChanged_updateTotal()

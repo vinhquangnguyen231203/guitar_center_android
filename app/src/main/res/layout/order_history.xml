@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -20,7 +21,7 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="579dp">
+            android:layout_height="511dp">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/order_list_view"
@@ -30,11 +31,18 @@
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp" />
         </ScrollView>
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_orderHistory_home"
+
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:text="Quay về trang chủ" />
+            android:layout_height="match_parent" >
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_orderHistory_home"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="Quay về trang chủ" />
+        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

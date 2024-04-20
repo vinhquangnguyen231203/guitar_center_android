@@ -88,6 +88,7 @@ public class CartActivity extends AppCompatActivity {
         btnPayment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                adapter.loadCart();
                 adapter.payment();
             }
         });

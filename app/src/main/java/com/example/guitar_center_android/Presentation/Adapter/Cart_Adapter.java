@@ -409,8 +409,30 @@ public class Cart_Adapter extends RecyclerView.Adapter<Cart_Adapter.CartViewHold
         EditText txtAdress = ((CartActivity)context).findViewById(R.id.address_cart);
 
         //Lưu thông tin vào OrderBody.Order
+//            "order":{
+//                   "address":"21 Hóc Môn",
+//                   "phone":"01241475143"
+//             },
+//            "orderDetails": [
+//                    {
+//                    "price": "5000",
+//                     "unit": "3",
+//                    "productId" : "P01"
+//                    },
+//                    {
+//                    "price": "5000",
+//                    "unit": "4",
+//                    "productId" : "M01"
+//                    }
+//
+//        ]
         OrderBody.Order order = new OrderBody.Order(txtAddress.getText().toString(),txtPhoneNumber.getText().toString());
         List<OrderBody.OrderDetail> listOrderDetails = getListOrderDetails();
+
+        for(OrderBody.OrderDetail orderDetails : listOrderDetails)
+        {
+            Log.d("listOrderDetails_JSONs",orderDetails.toString());
+        }
 
         OrderBody orderBody = new OrderBody(order,listOrderDetails);
 
@@ -445,9 +467,10 @@ public class Cart_Adapter extends RecyclerView.Adapter<Cart_Adapter.CartViewHold
     private List<OrderBody.OrderDetail> getListOrderDetails()
     {
         List<OrderBody.OrderDetail> listOrderDetails = new ArrayList<>();
-        OrderBody.OrderDetail orderDetail = new OrderBody.OrderDetail();
+
         for(Product product: productList)
         {
+            OrderBody.OrderDetail orderDetail = new OrderBody.OrderDetail();
             orderDetail.setProductId(product.getProductId());
             orderDetail.setPrice(product.getPrice());
             orderDetail.setUnit(product.getUnit());

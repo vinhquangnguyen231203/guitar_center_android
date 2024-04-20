@@ -68,6 +68,15 @@ public class OrderBody {
         public void setProductId(String productId) {
             this.productId = productId;
         }
+
+        @Override
+        public String toString() {
+            return "OrderDetail{" +
+                    "price=" + price +
+                    ", unit=" + unit +
+                    ", productId='" + productId + '\'' +
+                    '}';
+        }
     }
 
     private Order order;

@@ -409,7 +409,7 @@ public class Cart_Adapter extends RecyclerView.Adapter<Cart_Adapter.CartViewHold
         EditText txtAdress = ((CartActivity)context).findViewById(R.id.address_cart);
 
         //Lưu thông tin vào OrderBody.Order
-        OrderBody.Order order = new OrderBody.Order(txtAddress.toString(),txtPhoneNumber.toString());
+        OrderBody.Order order = new OrderBody.Order(txtAddress.getText().toString(),txtPhoneNumber.getText().toString());
         List<OrderBody.OrderDetail> listOrderDetails = getListOrderDetails();
 
         OrderBody orderBody = new OrderBody(order,listOrderDetails);

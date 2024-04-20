@@ -15,9 +15,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.guitar_center_android.Domain.Services.APIServices.Manager.OrderManager;
 import com.example.guitar_center_android.Domain.Services.APIServices.Manager.ProductManager;
+import com.example.guitar_center_android.Domain.Services.Implementation.UserServices;
 import com.example.guitar_center_android.Domain.model.Order;
 import com.example.guitar_center_android.Domain.model.OrderDetail;
 import com.example.guitar_center_android.Domain.model.Product;
+import com.example.guitar_center_android.Domain.model.UserSQL;
+import com.example.guitar_center_android.Presentation.Activity.OrderDetailsActivity;
 import com.example.guitar_center_android.R;
 import com.squareup.picasso.Picasso;
 
@@ -34,7 +37,10 @@ public class OrderDetail_Adapter extends RecyclerView.Adapter<OrderDetail_Adapte
     private OrderManager orderManager;
     private ProductManager productManager;
 
+    private UserServices userServices;
+
     private  Intent intent;
+    private String fullName;
 
 
     public  OrderDetail_Adapter(Context context, OrderManager orderManager){
@@ -120,25 +126,59 @@ public class OrderDetail_Adapter extends RecyclerView.Adapter<OrderDetail_Adapte
         this.productManager = productManager;
     }
 
+    public void setUserServices(UserServices userServices)
+    {
+        this.userServices = userServices;
+    }
+
     //----------- Load danh sách order details
     public void loadOrderDetails()
     {
         String orderId =  intent.getStringExtra("ORDER_ID");
         String userName = intent.getStringExtra("USERNAME");
+        String address = intent.getStringExtra("ADDRESS");
+        String orderDate = intent.getStringExtra("ORDER_DATE");
+        String phone = intent.getStringExtra("PHONE");
+        String status = intent.getStringExtra("STATUS");
+        Double price = intent.getDoubleExtra("TOTAL_PRICE",0);
+
+        Order order = new Order(orderId,address,orderDate,phone,status,price,userName);
+
+        Log.d("CheckOrderDetailInfo",order.toString());
+
 
         orderManager.getOrderDetails(userName, orderId, new Callback<List<OrderDetail>>() {
             @Override
             public void onResponse(Call<List<OrderDetail>> call, Response<List<OrderDetail>> response) {
                 orderDetailList = response.body();
-
-                //Đặt log check dữ liệu list
-
-                for(OrderDetail orderDetail : orderDetailList)
-                {
-                    Log.d("Check_order_list",orderDetail.toString());
-                }
-
                 notifyDataSetChanged();
+
+                //Lấy id
+                TextView txtOrderId = ((OrderDetailsActivity)context).findViewById(R.id.txt_orderDetail_orderId);
+                TextView txtOrderDate = ((OrderDetailsActivity)context).findViewById(R.id.txt_orderDetail_orderTime);
+                TextView txtPhone = ((OrderDetailsActivity)context).findViewById(R.id.txt_orderDetail_phone);
+                TextView txtStatus = ((OrderDetailsActivity)context).findViewById(R.id.txt_orderDetail_status);
+                TextView txtAddress = ((OrderDetailsActivity)context).findViewById(R.id.txt_orderDetail_address);
+                TextView txtTotalPrice = ((OrderDetailsActivity)context).findViewById(R.id.txt_orderDetail_totalPrice);
+                TextView txtName = ((OrderDetailsActivity)context).findViewById(R.id.txt_orderDetail_fullname);
+
+
+                //Hiển thị thông tin
+                txtOrderId.setText(orderId);
+                txtOrderDate.setText(orderDate);
+                txtPhone.setText(phone);
+                txtStatus.setText(status);
+                txtAddress.setText(address);
+                txtTotalPrice.setText(price + "$");
+
+                List<UserSQL> listUser = userServices.getAllUser();
+
+                for(UserSQL user: listUser)
+                {
+                    fullName = user.getFullName();
+                }
+                txtName.setText(fullName);
+
             }
 
             @Override

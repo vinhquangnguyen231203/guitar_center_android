@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.guitar_center_android.Domain.Services.APIServices.Manager.OrderManager;
 import com.example.guitar_center_android.Domain.Services.APIServices.Manager.ProductManager;
+import com.example.guitar_center_android.Domain.Services.Implementation.UserServices;
 import com.example.guitar_center_android.Presentation.Adapter.OrderDetail_Adapter;
 import com.example.guitar_center_android.R;
 
@@ -25,6 +26,8 @@ private OrderManager orderManager;
 private ProductManager productManager;
 
 private RecyclerView recyclerView;
+
+private UserServices userServices;
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +45,9 @@ private RecyclerView recyclerView;
         //Tao moi ProductManager
         productManager = new ProductManager(this);
 
+        //Tao moi userServices
+        userServices = new UserServices(this);
+
         //Tạo mới adapter
         adapter = new OrderDetail_Adapter(this,orderManager);
 
@@ -50,6 +56,9 @@ private RecyclerView recyclerView;
 
         //Truyen ProductManger cho adapter
         adapter.setProductManager(productManager);
+
+        //Truyen UserServices cho adapter
+        adapter.setUserServices(userServices);
 
 
         //Recycle view add adapter

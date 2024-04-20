@@ -1,13 +1,13 @@
 package com.example.guitar_center_android.Domain.model;
 
 public class OrderDetail {
-    private String price;
+    private Double price;
     private int unit;
     private String orderId;
     private String productId;
 
     // Constructor
-    public OrderDetail(String price, int unit, String orderId, String productId) {
+    public OrderDetail(Double price, int unit, String orderId, String productId) {
         this.price = price;
         this.unit = unit;
         this.orderId = orderId;
@@ -15,11 +15,11 @@ public class OrderDetail {
     }
 
     // Getters and Setters
-    public String getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

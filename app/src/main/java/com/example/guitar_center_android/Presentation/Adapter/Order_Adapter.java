@@ -2,6 +2,7 @@ package com.example.guitar_center_android.Presentation.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,6 +78,9 @@ public class Order_Adapter extends RecyclerView.Adapter<Order_Adapter.OrderViewH
         holder.textViewOrderStatus.setText(order.getStatus());
         holder.textViewOrderTotalPrice.setText(String.valueOf(order.getTotalPrice()));
 
+        Log.d("checkorder",order.toString());
+
+
         //set sự kiện chuyển hướng vào order detail
         holder.btnOrderDetail.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,7 +136,12 @@ public class Order_Adapter extends RecyclerView.Adapter<Order_Adapter.OrderViewH
 
         //đính kèm dữ liệu cần gửi
         intent.putExtra("ORDER_ID", order.getOrderId());
-        intent.putExtra("USERNAME",username);
+        intent.putExtra("USERNAME",order.getUsername());
+        intent.putExtra("ADDRESS", order.getAddress());
+        intent.putExtra("ORDER_DATE",order.getOrderDate());
+        intent.putExtra("PHONE", order.getPhone());
+        intent.putExtra("STATUS", order.getStatus());
+        intent.putExtra("TOTAL_PRICE",order.getTotalPrice());
 
         context.startActivity(intent);
     }

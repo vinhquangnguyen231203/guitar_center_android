@@ -8,13 +8,13 @@
     >
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="1dp"
-        android:orientation="vertical"
         android:layout_marginTop="10dp"
-        >
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="1dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -23,43 +23,47 @@
             android:text="Chi tiêt đơn hàng"
             android:textSize="20sp"
             android:textStyle="bold" />
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Order ID:"
-                android:layout_marginLeft="15sp"
-                android:textSize="16sp"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:id="@+id/txt_orderDetail_orderId"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5sp"
-                android:text="0123456789"
-                android:textSize="16sp" />
-        </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true">
+                android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Order date:"
                     android:layout_marginLeft="15sp"
+                    android:text="Order ID:"
                     android:textSize="16sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_orderDetail_orderId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5sp"
+                    android:text="0123456789"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15sp"
+                    android:text="Order date:"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/txt_orderDetail_orderTime"
@@ -73,18 +77,13 @@
             </LinearLayout>
         </RelativeLayout>
 
-        <ScrollView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/orderDetail_listView"
             android:layout_width="match_parent"
-            android:layout_height="308dp"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="match_parent"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/orderDetail_listView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp" />
-        </ScrollView>
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -94,9 +93,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="307dp"
+                android:background="#FBB3CB"
                 android:orientation="vertical"
-                android:padding="30dp"
-                android:background="#FBB3CB">
+                android:padding="30dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -109,6 +108,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
                     android:layout_marginBottom="12sp">
 
                     <TextView
@@ -130,6 +130,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
                     android:layout_marginBottom="12sp">
 
                     <TextView
@@ -150,7 +151,8 @@
 
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -171,7 +173,8 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp">
 
                     <TextView
                         android:layout_width="98dp"
@@ -187,10 +190,14 @@
                         android:text="371 nguyễn kiệm"
                         android:textSize="16sp" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="85dp">
+                    android:layout_marginLeft="80dp"
+                    android:layout_marginTop="16dp"
+                    android:textAlignment="center">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -212,20 +219,24 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/btn_backToOrder"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Quay về đơn hàng"
-                android:textStyle="bold"
-                android:textSize="16dp"
-                android:gravity="center"
-                android:layout_marginLeft="120dp" />
+    </LinearLayout>
 
-        </RelativeLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="68dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <Button
+            android:id="@+id/btn_backToOrder"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Quay về đơn hàng"
+            android:textSize="16dp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

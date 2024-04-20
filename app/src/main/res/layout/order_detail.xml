@@ -80,19 +80,19 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/orderDetail_listView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="280dp"
             android:paddingStart="16dp"
             android:paddingEnd="16dp" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="400dp"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="-30dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="307dp"
+                android:layout_height="match_parent"
                 android:background="#FBB3CB"
                 android:orientation="vertical"
                 android:padding="30dp">
@@ -221,15 +221,16 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <GridLayout
+        android:layout_width="match_parent"
+
         android:layout_height="50dp"
-        android:layout_marginTop="68dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
         <Button
+            android:layout_gravity="center"
             android:id="@+id/btn_backToOrder"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -238,6 +239,6 @@
             android:textSize="16dp"
             android:textStyle="bold" />
 
-    </LinearLayout>
+    </GridLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
